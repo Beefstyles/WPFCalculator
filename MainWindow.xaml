@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFCalculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="150">
+        Title="WPF Calculator" HorizontalAlignment="Center" Height="380" Width="240">
+    <Window.Resources>
+        <Style x:Key="CalcButton" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
     <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Width="50" HorizontalAlignment="Center" Header="_View">
+                
+            </MenuItem>
+            <MenuItem Width="50" HorizontalAlignment="Center" Header="_Edit">
+
+            </MenuItem>
+            <MenuItem Width="50" HorizontalAlignment="Center" Header="_Help">
+
+            </MenuItem>
+        </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -24,36 +41,38 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5"/>
-            <Button Grid.Column="0" Grid.Row="1">MC</Button>
-            <Button Grid.Column="1" Grid.Row="1">MR</Button>
-            <Button Grid.Column="2" Grid.Row="1">MS</Button>
-            <Button Grid.Column="3" Grid.Row="1">M+</Button>
-            <Button Grid.Column="4" Grid.Row="1">M-</Button>
-            <Button Grid.Column="0" Grid.Row="2">Clr</Button>
-            <Button Grid.Column="1" Grid.Row="2">CE</Button>
-            <Button Grid.Column="2" Grid.Row="2">C</Button>
-            <Button Grid.Column="3" Grid.Row="2">+-</Button>
-            <Button Grid.Column="4" Grid.Row="2">SQRT</Button>
-            <Button Grid.Column="0" Grid.Row="3">7</Button>
-            <Button Grid.Column="1" Grid.Row="3">8</Button>
-            <Button Grid.Column="2" Grid.Row="3">9</Button>
-            <Button Grid.Column="3" Grid.Row="3">/</Button>
-            <Button Grid.Column="4" Grid.Row="3">Mod</Button>
-            <Button Grid.Column="0" Grid.Row="4">4</Button>
-            <Button Grid.Column="1" Grid.Row="4">5</Button>
-            <Button Grid.Column="2" Grid.Row="4">6</Button>
-            <Button Grid.Column="3" Grid.Row="4">*</Button>
-            <Button Grid.Column="4" Grid.Row="4">1/x</Button>
-            <Button Grid.Column="0" Grid.Row="5">1</Button>
-            <Button Grid.Column="1" Grid.Row="5">2</Button>
-            <Button Grid.Column="2" Grid.Row="5">3</Button>
-            <Button Grid.Column="3" Grid.Row="5">-</Button>
-            <Button Grid.Column="4" Grid.Row="5" Grid.RowSpan="2">=/x</Button>
-            <Button Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2">0</Button>
-            <Button Grid.Column="2" Grid.Row="6">.</Button>
-            <Button Grid.Column="3" Grid.Row="6">+</Button>
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Margin="2" Padding="5"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Margin="2" Padding="5"/>
+            <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource CalcButton}">MC</Button>
+            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource CalcButton}">MR</Button>
+            <Button Grid.Column="2" Grid.Row="2" Style="{StaticResource CalcButton}">MS</Button>
+            <Button Grid.Column="3" Grid.Row="2" Style="{StaticResource CalcButton}">M+</Button>
+            <Button Grid.Column="4" Grid.Row="2" Style="{StaticResource CalcButton}">M-</Button>
+            <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource CalcButton}">Clr</Button>
+            <Button Grid.Column="1" Grid.Row="3" Style="{StaticResource CalcButton}">CE</Button>
+            <Button Grid.Column="2" Grid.Row="3" Style="{StaticResource CalcButton}">C</Button>
+            <Button Grid.Column="3" Grid.Row="3" Style="{StaticResource CalcButton}">+-</Button>
+            <Button Grid.Column="4" Grid.Row="3" Style="{StaticResource CalcButton}">SQRT</Button>
+            <Button Grid.Column="0" Grid.Row="4" Style="{StaticResource CalcButton}">7</Button>
+            <Button Grid.Column="1" Grid.Row="4" Style="{StaticResource CalcButton}">8</Button>
+            <Button Grid.Column="2" Grid.Row="4" Style="{StaticResource CalcButton}">9</Button>
+            <Button Grid.Column="3" Grid.Row="4" Style="{StaticResource CalcButton}">/</Button>
+            <Button Grid.Column="4" Grid.Row="4" Style="{StaticResource CalcButton}">Mod</Button>
+            <Button Grid.Column="0" Grid.Row="5" Style="{StaticResource CalcButton}">4</Button>
+            <Button Grid.Column="1" Grid.Row="5" Style="{StaticResource CalcButton}">5</Button>
+            <Button Grid.Column="2" Grid.Row="5" Style="{StaticResource CalcButton}">6</Button>
+            <Button Grid.Column="3" Grid.Row="5" Style="{StaticResource CalcButton}">*</Button>
+            <Button Grid.Column="4" Grid.Row="5" Style="{StaticResource CalcButton}">1/x</Button>
+            <Button Grid.Column="0" Grid.Row="6" Style="{StaticResource CalcButton}">1</Button>
+            <Button Grid.Column="1" Grid.Row="6" Style="{StaticResource CalcButton}">2</Button>
+            <Button Grid.Column="2" Grid.Row="6" Style="{StaticResource CalcButton}">3</Button>
+            <Button Grid.Column="3" Grid.Row="6" Style="{StaticResource CalcButton}">-</Button>
+            <Button Grid.Column="4" Grid.Row="6" Grid.RowSpan="2" Style="{StaticResource CalcButton}">=/x</Button>
+            <Button Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2"  Style="{StaticResource CalcButton}">0</Button>
+            <Button Grid.Column="2" Grid.Row="7" Style="{StaticResource CalcButton}">.</Button>
+            <Button Grid.Column="3" Grid.Row="7" Style="{StaticResource CalcButton}">+</Button>
 
             
         </Grid>
