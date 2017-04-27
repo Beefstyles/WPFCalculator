@@ -20,9 +20,11 @@ namespace WPFCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        Calculator calculator = new Calculator { OperationString = "", ResultsString = "" };
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = calculator;
         }
     }
 }
