@@ -21,10 +21,25 @@ namespace WPFCalculator
     public partial class MainWindow : Window
     {
         Calculator calculator = new Calculator { OperationString = "", ResultsString = "" };
+        CalculatorOperations calcOps = new CalculatorOperations();
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = calculator;
+        }
+
+        private void ArithmeticHandler(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            switch (button.Name)
+            {
+                case ("Addition"):
+                    break;
+                default:
+                    MessageBox.Show("Not implemented");
+                   break;
+            }
+
         }
     }
 }
