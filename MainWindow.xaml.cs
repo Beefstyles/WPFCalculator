@@ -20,7 +20,7 @@ namespace WPFCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0 };
+        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, SecondDigit = 0 };
         CalculatorOperations calcOps = new CalculatorOperations();
         public MainWindow()
         {
@@ -28,6 +28,10 @@ namespace WPFCalculator
             this.DataContext = calculator;
         }
 
+        private void UpdateCurrentOperationString()
+        {
+
+        }
         private void ArithmeticHandler(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;

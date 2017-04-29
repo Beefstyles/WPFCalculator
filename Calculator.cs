@@ -31,6 +31,21 @@ namespace WPFCalculator
             set { currentDigit = value; }
         }
 
+        public int SecondDigit
+        {
+            get
+            {
+                return secondDigit;
+            }
+
+            set
+            {
+                secondDigit = value;
+            }
+        }
+
         private int currentDigit;
+
+        private int secondDigit;
     }
 }
