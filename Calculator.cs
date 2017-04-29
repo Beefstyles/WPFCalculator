@@ -23,5 +23,14 @@ namespace WPFCalculator
             get { return resultsString; }
             set { resultsString = value; }
         }
+
+        public int CurrentDigit
+        {
+            get {return currentDigit; }
+
+            set { currentDigit = value; }
+        }
+
+        private int currentDigit;
     }
 }

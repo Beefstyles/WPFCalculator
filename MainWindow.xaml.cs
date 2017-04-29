@@ -20,7 +20,7 @@ namespace WPFCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        Calculator calculator = new Calculator { OperationString = "", ResultsString = "" };
+        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0 };
         CalculatorOperations calcOps = new CalculatorOperations();
         public MainWindow()
         {
@@ -40,6 +40,14 @@ namespace WPFCalculator
                    break;
             }
 
+        }
+
+        private void NumberEntryHandler(object sender, RoutedEventArgs e)
+        {
+            var numberButton = sender as Button;
+            int numberButtonDigit;
+            int.TryParse(numberButton.Tag.ToString(), out numberButtonDigit);
+            calculator.CurrentDigit = numberButtonDigit;
         }
     }
 }
