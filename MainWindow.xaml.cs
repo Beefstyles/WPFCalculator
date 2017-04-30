@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace WPFCalculator
         {
             InitializeComponent();
             this.DataContext = calculator;
+            UpdateCurrentOperationString();
         }
 
         private void UpdateCurrentOperationString()
@@ -51,7 +53,9 @@ namespace WPFCalculator
             var numberButton = sender as Button;
             int numberButtonDigit;
             int.TryParse(numberButton.Tag.ToString(), out numberButtonDigit);
+            Debug.WriteLine(numberButtonDigit.ToString());
             calculator.CurrentDigit = numberButtonDigit;
+            UpdateCurrentOperationString();
         }
     }
 }
