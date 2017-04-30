@@ -30,7 +30,7 @@ namespace WPFCalculator
 
         private void UpdateCurrentOperationString()
         {
-
+            calculator.ResultsString = calculator.CurrentDigit.ToString();
         }
         private void ArithmeticHandler(object sender, RoutedEventArgs e)
         {
