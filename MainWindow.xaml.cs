@@ -40,6 +40,14 @@ namespace WPFCalculator
             switch (button.Name)
             {
                 case ("Addition"):
+                    if (calcOps.SecondDigitSet)
+                    {
+                        calculator.ResultsString = (calcOps.Addition(calculator.CurrentDigit, calculator.SecondDigit)).ToString();
+                    }
+                    else
+                    {
+                        calcOps.SecondDigitSet = true;
+                    }
                     break;
                 default:
                     MessageBox.Show("Not implemented");
