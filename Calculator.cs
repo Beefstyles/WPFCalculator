@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WPFCalculator
 {
-    public class Calculator
+    public class Calculator : INotifyPropertyChanged
     {
         private string operationString;
 
         public string OperationString
         {
             get { return operationString; }
-            set { operationString = value; }
+            set
+            {
+                operationString = value;
+                NotifyPropertyChanged("OperationString");
+            }
         }
 
         private string resultsString;
@@ -21,14 +26,22 @@ namespace WPFCalculator
         public string ResultsString
         {
             get { return resultsString; }
-            set { resultsString = value; }
+            set
+            {
+                resultsString = value;
+                NotifyPropertyChanged("ResultsString");
+            }
         }
 
         public int CurrentDigit
         {
             get {return currentDigit; }
 
-            set { currentDigit = value; }
+            set
+            {
+                currentDigit = value;
+                NotifyPropertyChanged("CurrentDigit");
+            }
         }
 
         public int SecondDigit
@@ -41,11 +54,22 @@ namespace WPFCalculator
             set
             {
                 secondDigit = value;
+                NotifyPropertyChanged("SecondDigit");
             }
         }
 
         private int currentDigit;
 
         private int secondDigit;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }
