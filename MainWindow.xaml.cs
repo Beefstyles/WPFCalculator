@@ -59,8 +59,9 @@ namespace WPFCalculator
         private void NumberEntryHandler(object sender, RoutedEventArgs e)
         {
             var numberButton = sender as Button;
+            string newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
             int numberButtonDigit;
-            int.TryParse(numberButton.Tag.ToString(), out numberButtonDigit);
+            int.TryParse(newValue, out numberButtonDigit);
             calculator.CurrentDigit = numberButtonDigit;
             UpdateCurrentOperationString();
         }
