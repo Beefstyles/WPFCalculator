@@ -43,9 +43,12 @@ namespace WPFCalculator
                     if (calcOps.SecondDigitSet)
                     {
                         calculator.ResultsString = (calcOps.Addition(calculator.CurrentDigit, calculator.SecondDigit)).ToString();
+                        calcOps.SecondDigitSet = false;
                     }
                     else
                     {
+                        calculator.OperationString = calculator.CurrentDigit + " +";
+                        calculator.SecondDigit = calculator.CurrentDigit;
                         calcOps.SecondDigitSet = true;
                     }
                     break;
@@ -53,13 +56,20 @@ namespace WPFCalculator
                     MessageBox.Show("Not implemented");
                    break;
             }
-
         }
 
         private void NumberEntryHandler(object sender, RoutedEventArgs e)
         {
             var numberButton = sender as Button;
-            string newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
+            string newValue;
+            if (calcOps.SecondDigitSet)
+            {
+                newValue = numberButton.Tag.ToString();
+            }
+            else
+            {
+                newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
+            }
             int numberButtonDigit;
             int.TryParse(newValue, out numberButtonDigit);
             calculator.CurrentDigit = numberButtonDigit;
