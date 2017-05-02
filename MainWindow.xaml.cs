@@ -43,11 +43,13 @@ namespace WPFCalculator
                     if (calcOps.SecondDigitSet)
                     {
                         calculator.ResultsString = (calcOps.Addition(calculator.CurrentDigit, calculator.SecondDigit)).ToString();
+                        calculator.OperationString += calculator.CurrentDigit + " + ";
+                        calculator.ResultsString = "";
                         calcOps.SecondDigitSet = false;
                     }
                     else
                     {
-                        calculator.OperationString = calculator.CurrentDigit + " +";
+                        calculator.OperationString += calculator.CurrentDigit + " + ";
                         calculator.SecondDigit = calculator.CurrentDigit;
                         calcOps.SecondDigitSet = true;
                     }
