@@ -58,6 +58,20 @@ namespace WPFCalculator
             }
         }
 
+        public int CurrentSubTotal
+        {
+            get
+            {
+                return currentSubTotal;
+            }
+            set
+            {
+                currentSubTotal = value;
+            }
+        }
+
+        private int currentSubTotal;
+
         private int currentDigit;
 
         private int secondDigit;

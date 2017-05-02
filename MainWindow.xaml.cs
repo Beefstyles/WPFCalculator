@@ -42,15 +42,17 @@ namespace WPFCalculator
                 case ("Addition"):
                     if (calcOps.SecondDigitSet)
                     {
-                        calculator.ResultsString = (calcOps.Addition(calculator.CurrentDigit, calculator.SecondDigit)).ToString();
+                        calculator.ResultsString = ((calcOps.Addition(calculator.CurrentDigit, calculator.SecondDigit)) + calculator.CurrentSubTotal).ToString();
+                        calculator.CurrentSubTotal += int.Parse(calculator.ResultsString);
                         calculator.OperationString += calculator.CurrentDigit + " + ";
-                        calculator.ResultsString = "";
+
                         calcOps.SecondDigitSet = false;
                     }
                     else
                     {
                         calculator.OperationString += calculator.CurrentDigit + " + ";
                         calculator.SecondDigit = calculator.CurrentDigit;
+                        calculator.ResultsString = calculator.CurrentDigit.ToString();
                         calcOps.SecondDigitSet = true;
                     }
                     break;
