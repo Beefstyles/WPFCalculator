@@ -56,6 +56,9 @@ namespace WPFCalculator
                         calcOps.SecondDigitSet = true;
                     }
                     break;
+                case ("Subtraction"):
+                    //TODO - Implement
+                    break;
                 default:
                     MessageBox.Show("Not implemented");
                    break;
