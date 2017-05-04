@@ -40,15 +40,15 @@ namespace WPFCalculator
             switch (button.Name)
             {
                 case ("Addition"):
-                    if (calcOps.SecondDigitSet)
+                    if (calcOps.DigitEntrySet)
                     {
-                        calculator.ResultsString = ((calcOps.Addition(calculator.CurrentDigit, calculator.SecondDigit)) + calculator.CurrentSubTotal).ToString();
+                        calculator.ResultsString = ((calcOps.Addition(calculator.CurrentDigit, calculator.)) + calculator.CurrentSubTotal).ToString();
                         calculator.CurrentSubTotal += int.Parse(calculator.ResultsString);
                         calculator.OperationString += calculator.CurrentDigit + " + ";
 
                         calcOps.SecondDigitSet = false;
                     }
-                    else
+                    else if (calcOps.SubTotalSet)
                     {
                         calculator.OperationString += calculator.CurrentDigit + " + ";
                         calculator.SecondDigit = calculator.CurrentDigit;

@@ -24,6 +24,36 @@ namespace WPFCalculator
             }
         }
 
+        public bool SubTotalSet
+        {
+            get
+            {
+                return subTotalSet;
+            }
+
+            set
+            {
+                subTotalSet = value;
+            }
+        }
+
+        public bool DigitEntrySet
+        {
+            get
+            {
+                return digitEntrySet;
+            }
+
+            set
+            {
+                digitEntrySet = value;
+            }
+        }
+
+        private bool subTotalSet;
+
+        private bool digitEntrySet;
+
         public int Addition(int a, int b)
         {
             int result = a + b;
