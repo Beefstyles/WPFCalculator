@@ -27,12 +27,27 @@ namespace WPFCalculator
         {
             InitializeComponent();
             this.DataContext = calculator;
-            UpdateCurrentOperationString();
+            UpdateCurrentOperationString("0");
+            calculator.CurrentSubTotal = 0;
         }
 
-        private void UpdateCurrentOperationString()
+        private void UpdateCurrentOperationString(string digit)
         {
-            calculator.ResultsString = calculator.CurrentDigit.ToString();
+            calculator.ResultsString = digit.ToString();
+            /*if (calcOps.SubTotalSet)
+            {
+                calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            }
+            else
+            {
+                calculator.ResultsString = calculator.CurrentDigit.ToString();
+            }
+            */
+        }
+
+        private void ClearCurrentDigit()
+        {
+            calculator.CurrentDigit = 0;
         }
         private void ArithmeticHandler(object sender, RoutedEventArgs e)
         {
@@ -42,19 +57,17 @@ namespace WPFCalculator
                 case ("Addition"):
                     if (calcOps.DigitEntrySet)
                     {
-                        calculator.ResultsString = ((calcOps.Addition(calculator.CurrentDigit, calculator.)) + calculator.CurrentSubTotal).ToString();
-                        calculator.CurrentSubTotal += int.Parse(calculator.ResultsString);
+                        calculator.CurrentSubTotal += calculator.CurrentDigit;     
                         calculator.OperationString += calculator.CurrentDigit + " + ";
-
-                        calcOps.SecondDigitSet = false;
+                        calcOps.DigitEntrySet = false;
                     }
-                    else if (calcOps.SubTotalSet)
+                    else
                     {
-                        calculator.OperationString += calculator.CurrentDigit + " + ";
-                        calculator.SecondDigit = calculator.CurrentDigit;
-                        calculator.ResultsString = calculator.CurrentDigit.ToString();
-                        calcOps.SecondDigitSet = true;
+                        calculator.CurrentSubTotal += calculator.CurrentSubTotal;
+                        calculator.OperationString += calculator.CurrentSubTotal + " + ";
                     }
+                    ClearCurrentDigit();
+                    calculator.ResultsString = calculator.CurrentSubTotal.ToString();
                     break;
                 case ("Subtraction"):
                     //TODO - Implement
@@ -68,19 +81,14 @@ namespace WPFCalculator
         private void NumberEntryHandler(object sender, RoutedEventArgs e)
         {
             var numberButton = sender as Button;
+            calcOps.DigitEntrySet = true;
             string newValue;
-            if (calcOps.SecondDigitSet)
-            {
-                newValue = numberButton.Tag.ToString();
-            }
-            else
-            {
-                newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
-            }
+            newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
             int numberButtonDigit;
+            calcOps.DigitEntrySet = true;
             int.TryParse(newValue, out numberButtonDigit);
             calculator.CurrentDigit = numberButtonDigit;
-            UpdateCurrentOperationString();
+            UpdateCurrentOperationString(newValue);
         }
     }
 }
