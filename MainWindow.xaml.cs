@@ -57,33 +57,23 @@ namespace WPFCalculator
                 switch (button.Name)
                 {
                     case ("Addition"):
-                        if (calcOps.DigitEntrySet)
-                        {
-                            calculator.CurrentSubTotal += calculator.CurrentDigit;
-                            calculator.OperationString += calculator.CurrentDigit + " + ";
-                            calcOps.DigitEntrySet = false;
-                        }
-                        else
-                        {
-                            calculator.CurrentSubTotal += calculator.CurrentSubTotal;
-                            calculator.OperationString += calculator.CurrentSubTotal + " + ";
-                        }
+                         calculator.CurrentSubTotal += calculator.CurrentDigit;
+                         calculator.OperationString += calculator.CurrentDigit + " + ";
+                         calcOps.DigitEntrySet = false;
+                          ClearCurrentDigit();
+                          calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+                        break;
+                    case ("Subtraction"):
+                        calculator.CurrentSubTotal -= calculator.CurrentDigit;
+                        calculator.OperationString += calculator.CurrentDigit + " - ";
+                        calcOps.DigitEntrySet = false;
                         ClearCurrentDigit();
                         calculator.ResultsString = calculator.CurrentSubTotal.ToString();
                         break;
-                    case ("Subtraction"):
-                        if (calcOps.DigitEntrySet)
-                        {
-                            calculator.CurrentSubTotal -= calculator.CurrentDigit;
-                            calculator.OperationString += calculator.CurrentDigit + " - ";
-                            calcOps.DigitEntrySet = false;
-                        }
-                        else
-                        {
-                            calculator.CurrentSubTotal -= calculator.CurrentSubTotal;
-                            calculator.OperationString += calculator.CurrentSubTotal + " - ";
-                        }
+                    case ("Equals"):
+                        calculator.OperationString = "";
                         ClearCurrentDigit();
+                        calcOps.DigitEntrySet = false;
                         calculator.ResultsString = calculator.CurrentSubTotal.ToString();
                         break;
                     default:
