@@ -52,30 +52,47 @@ namespace WPFCalculator
         private void ArithmeticHandler(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            switch (button.Name)
+            if (!calcOps.ArithemticDone)
             {
-                case ("Addition"):
-                    if (calcOps.DigitEntrySet)
-                    {
-                        calculator.CurrentSubTotal += calculator.CurrentDigit;     
-                        calculator.OperationString += calculator.CurrentDigit + " + ";
-                        calcOps.DigitEntrySet = false;
-                    }
-                    else
-                    {
-                        calculator.CurrentSubTotal += calculator.CurrentSubTotal;
-                        calculator.OperationString += calculator.CurrentSubTotal + " + ";
-                    }
-                    ClearCurrentDigit();
-                    calculator.ResultsString = calculator.CurrentSubTotal.ToString();
-                    break;
-                case ("Subtraction"):
-                    //TODO - Implement
-                    break;
-                default:
-                    MessageBox.Show("Not implemented");
-                   break;
+                switch (button.Name)
+                {
+                    case ("Addition"):
+                        if (calcOps.DigitEntrySet)
+                        {
+                            calculator.CurrentSubTotal += calculator.CurrentDigit;
+                            calculator.OperationString += calculator.CurrentDigit + " + ";
+                            calcOps.DigitEntrySet = false;
+                        }
+                        else
+                        {
+                            calculator.CurrentSubTotal += calculator.CurrentSubTotal;
+                            calculator.OperationString += calculator.CurrentSubTotal + " + ";
+                        }
+                        ClearCurrentDigit();
+                        calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+                        break;
+                    case ("Subtraction"):
+                        if (calcOps.DigitEntrySet)
+                        {
+                            calculator.CurrentSubTotal -= calculator.CurrentDigit;
+                            calculator.OperationString += calculator.CurrentDigit + " - ";
+                            calcOps.DigitEntrySet = false;
+                        }
+                        else
+                        {
+                            calculator.CurrentSubTotal -= calculator.CurrentSubTotal;
+                            calculator.OperationString += calculator.CurrentSubTotal + " - ";
+                        }
+                        ClearCurrentDigit();
+                        calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+                        break;
+                    default:
+                        MessageBox.Show("Not implemented");
+                        break;
+                }
             }
+            
+            calcOps.ArithemticDone = true;
         }
 
         private void NumberEntryHandler(object sender, RoutedEventArgs e)
@@ -89,6 +106,7 @@ namespace WPFCalculator
             int.TryParse(newValue, out numberButtonDigit);
             calculator.CurrentDigit = numberButtonDigit;
             UpdateCurrentOperationString(newValue);
+            calcOps.ArithemticDone = false;
         }
     }
 }

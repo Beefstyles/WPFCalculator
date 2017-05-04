@@ -70,18 +70,6 @@ namespace WPFCalculator
             }
         }
 
-        private int currentTotal;
-        public int CurrentTotal
-        {
-            get 
-            {
-                return currentTotal;
-            }
-            set
-            {
-                currentTotal = value;
-            }
-        }
 
         private int currentSubTotal;
 

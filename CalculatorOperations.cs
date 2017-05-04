@@ -9,18 +9,18 @@ namespace WPFCalculator
 {
     class CalculatorOperations
     {
-        private bool secondDigitSet;
+        private bool arithemticDone;
 
-        public bool SecondDigitSet
+        public bool ArithemticDone
         {
             get
             {
-                return secondDigitSet;
+                return arithemticDone;
             }
 
             set
             {
-                secondDigitSet = value;
+                arithemticDone = value;
             }
         }
 
