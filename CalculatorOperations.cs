@@ -57,7 +57,12 @@ namespace WPFCalculator
         public int Addition(int a, int b)
         {
             int result = a + b;
-            Debug.WriteLine(result.ToString());
+            return result;
+        }
+
+        public int Subtraction(int a, int b)
+        {
+            int result = a - b;
             return result;
         }
     }

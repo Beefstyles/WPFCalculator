@@ -57,7 +57,7 @@ namespace WPFCalculator
                 switch (button.Name)
                 {
                     case ("Addition"):
-                         calculator.CurrentSubTotal += calculator.CurrentDigit;
+                         calculator.CurrentSubTotal = calcOps.Addition(calculator.CurrentSubTotal,calculator.CurrentDigit);
                          calculator.OperationString += calculator.CurrentDigit + " + ";
                          calcOps.DigitEntrySet = false;
                           ClearCurrentDigit();
@@ -90,6 +90,14 @@ namespace WPFCalculator
             var numberButton = sender as Button;
             calcOps.DigitEntrySet = true;
             string newValue;
+            if(calculator.CurrentDigit == 0)
+            {
+                newValue = calculator.CurrentDigit.ToString();
+            }
+            else
+            {
+                newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
+            }
             newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
             int numberButtonDigit;
             calcOps.DigitEntrySet = true;
