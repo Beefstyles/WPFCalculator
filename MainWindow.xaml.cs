@@ -90,15 +90,15 @@ namespace WPFCalculator
             var numberButton = sender as Button;
             calcOps.DigitEntrySet = true;
             string newValue;
-            if(calculator.CurrentDigit == 0)
+            if(calculator.ResultsString == "0")
             {
-                newValue = calculator.CurrentDigit.ToString();
+                newValue = numberButton.Tag.ToString();
             }
             else
             {
                 newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
+                newValue = newValue.Replace("0", string.Empty);
             }
-            newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
             int numberButtonDigit;
             calcOps.DigitEntrySet = true;
             int.TryParse(newValue, out numberButtonDigit);
