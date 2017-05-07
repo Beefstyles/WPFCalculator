@@ -36,15 +36,6 @@ namespace WPFCalculator
         private void UpdateCurrentOperationString(string digit)
         {
             calculator.ResultsString = digit.ToString();
-            /*if (calcOps.SubTotalSet)
-            {
-                calculator.ResultsString = calculator.CurrentSubTotal.ToString();
-            }
-            else
-            {
-                calculator.ResultsString = calculator.CurrentDigit.ToString();
-            }
-            */
         }
 
         private void ClearCurrentDigit()
