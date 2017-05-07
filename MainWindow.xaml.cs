@@ -65,19 +65,7 @@ namespace WPFCalculator
                         HandleSubtraction();
                         break;
                     case ("Equals"):
-                        calculator.OperationString = "";
-                        ClearCurrentDigit();
-                        calcOps.DigitEntrySet = false;
-                        calculator.ResultsString = calculator.CurrentSubTotal.ToString();
-                        switch (currentOperation)
-                        {
-                            case (CalculatorOperations.CurrentOperation.Addition):
-                                HandleAddition();
-                                break;
-                            case (CalculatorOperations.CurrentOperation.Subtraction):
-                                HandleSubtraction();
-                                break;
-                        }
+                        HandleEquals();
                         break;
                     default:
                         MessageBox.Show("Not implemented");
@@ -129,6 +117,23 @@ namespace WPFCalculator
             ClearCurrentDigit();
             calculator.ResultsString = calculator.CurrentSubTotal.ToString();
             currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
+        }
+
+        private void HandleEquals()
+        {
+            calculator.OperationString = "";
+            ClearCurrentDigit();
+            calcOps.DigitEntrySet = false;
+            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            switch (currentOperation)
+            {
+                case (CalculatorOperations.CurrentOperation.Addition):
+                    HandleAddition();
+                    break;
+                case (CalculatorOperations.CurrentOperation.Subtraction):
+                    HandleSubtraction();
+                    break;
+            }
         }
     }
 
