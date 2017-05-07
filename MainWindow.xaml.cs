@@ -111,7 +111,7 @@ namespace WPFCalculator
 
         private void HandleSubtraction()
         {
-            calculator.CurrentSubTotal -= calculator.CurrentDigit;
+            calculator.CurrentSubTotal = calcOps.Subtraction(calculator.CurrentSubTotal, calculator.CurrentDigit);
             calculator.OperationString += calculator.CurrentDigit + " - ";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit();
