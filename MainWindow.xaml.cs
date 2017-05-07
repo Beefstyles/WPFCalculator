@@ -50,6 +50,7 @@ namespace WPFCalculator
         private void ClearCurrentDigit()
         {
             calculator.CurrentDigit = 0;
+
         }
         private void ArithmeticHandler(object sender, RoutedEventArgs e)
         {
@@ -121,10 +122,6 @@ namespace WPFCalculator
 
         private void HandleEquals()
         {
-            calculator.OperationString = "";
-            ClearCurrentDigit();
-            calcOps.DigitEntrySet = false;
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
             switch (currentOperation)
             {
                 case (CalculatorOperations.CurrentOperation.Addition):
@@ -134,6 +131,12 @@ namespace WPFCalculator
                     HandleSubtraction();
                     break;
             }
+            calculator.OperationString = "";
+            ClearCurrentDigit();
+            calcOps.DigitEntrySet = false;
+            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
+            calculator.CurrentSubTotal = 0;
         }
     }
 
