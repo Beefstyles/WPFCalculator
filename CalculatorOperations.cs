@@ -9,6 +9,10 @@ namespace WPFCalculator
 {
     class CalculatorOperations
     {
+        public enum CurrentOperation
+        {
+            Addition, Subtraction, NoOperation
+        };
         private bool arithemticDone;
 
         public bool ArithemticDone
