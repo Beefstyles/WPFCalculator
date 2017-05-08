@@ -52,6 +52,9 @@ namespace WPFCalculator
                 case (CalculatorOperations.CurrentOperation.Multiplication):
                     HandleMultiplication(calculator, calcOps);
                     break;
+                case (CalculatorOperations.CurrentOperation.Division):
+                    HandleDivision(calculator, calcOps);
+                    break;
             }
             calculator.OperationString = "";
             ClearCurrentDigit(calculator);
@@ -84,6 +87,7 @@ namespace WPFCalculator
             if (calculator.CurrentSubTotal != 0)
             {
                 calculator.CurrentSubTotal = calcOps.Division(calculator.CurrentSubTotal, calculator.CurrentDigit);
+                Console.Write(calculator.CurrentSubTotal);
             }
             else
             {

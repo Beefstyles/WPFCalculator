@@ -67,7 +67,6 @@ namespace WPFCalculator
                         break;
                 }
             }
-
             calcOps.ArithemticDone = true;
         }
 
