@@ -21,16 +21,17 @@ namespace WPFCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        CalculatorButtonHandlers calcButtonHandlers = new CalculatorButtonHandlers();
         Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, SecondDigit = 0 };
         CalculatorOperations calcOps = new CalculatorOperations();
-        CalculatorOperations.CurrentOperation currentOperation;
+        
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = calculator;
             UpdateCurrentOperationString("0");
             calculator.CurrentSubTotal = 0;
-            currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
+            calcButtonHandlers.currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
         }
 
         private void UpdateCurrentOperationString(string digit)
@@ -38,11 +39,7 @@ namespace WPFCalculator
             calculator.ResultsString = digit.ToString();
         }
 
-        private void ClearCurrentDigit()
-        {
-            calculator.CurrentDigit = 0;
 
-        }
         private void ArithmeticHandler(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -90,39 +87,20 @@ namespace WPFCalculator
             calcOps.ArithemticDone = false;
         }
 
-
         private void HandleAddition()
         {
-            calculator.CurrentSubTotal = calcOps.Addition(calculator.CurrentSubTotal, calculator.CurrentDigit);
-            calculator.OperationString += calculator.CurrentDigit + " + ";
-            calcOps.DigitEntrySet = false;
-            ClearCurrentDigit();
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
-            currentOperation = CalculatorOperations.CurrentOperation.Addition;
+            calcButtonHandlers.HandleAddition(calculator, calcOps);
         }
+        
 
         private void HandleSubtraction()
         {
-            if (calculator.CurrentSubTotal != 0)
-            {
-                calculator.CurrentSubTotal = calcOps.Subtraction(calculator.CurrentSubTotal, calculator.CurrentDigit);
-            }
-            else
-            {
-                calculator.CurrentSubTotal = calculator.CurrentDigit;
-            }
-            
-            calculator.OperationString += calculator.CurrentDigit + " - ";
-            calcOps.DigitEntrySet = false;
-            
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
-            ClearCurrentDigit();
-            currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
+            calcButtonHandlers.HandleSubtraction(calculator, calcOps);
         }
 
         private void HandleEquals()
         {
-            switch (currentOperation)
+            switch (calcButtonHandlers.currentOperation)
             {
                 case (CalculatorOperations.CurrentOperation.Addition):
                     HandleAddition();
@@ -135,7 +113,7 @@ namespace WPFCalculator
             ClearCurrentDigit();
             calcOps.DigitEntrySet = false;
             calculator.ResultsString = calculator.CurrentSubTotal.ToString();
-            currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
+            calcButtonHandlers.currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
             calculator.CurrentSubTotal = 0;
         }
     }
