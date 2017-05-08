@@ -103,11 +103,20 @@ namespace WPFCalculator
 
         private void HandleSubtraction()
         {
-            calculator.CurrentSubTotal = calcOps.Subtraction(calculator.CurrentSubTotal, calculator.CurrentDigit);
+            if (calculator.CurrentSubTotal != 0)
+            {
+                calculator.CurrentSubTotal = calcOps.Subtraction(calculator.CurrentSubTotal, calculator.CurrentDigit);
+            }
+            else
+            {
+                calculator.CurrentSubTotal = calculator.CurrentDigit;
+            }
+            
             calculator.OperationString += calculator.CurrentDigit + " - ";
             calcOps.DigitEntrySet = false;
-            ClearCurrentDigit();
+            
             calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            ClearCurrentDigit();
             currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
         }
 
