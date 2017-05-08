@@ -57,6 +57,7 @@ namespace WPFCalculator
                         HandleEquals();
                         break;
                     case ("Division"):
+                        HandleDivision();
                         break;
                     case ("Multiplication"):
                         HandleMultiplication();
@@ -114,7 +115,7 @@ namespace WPFCalculator
 
         private void HandleDivision()
         {
-            calcButtonHandlers.HandleEquals(calculator, calcOps);
+            calcButtonHandlers.HandleDivision(calculator, calcOps);
         }
     }
 }

@@ -76,5 +76,11 @@ namespace WPFCalculator
             return result;
         }
 
+        public double Division(double a, double b)
+        {
+            double result = a / b;
+            return result;
+        }
+
     }
 }

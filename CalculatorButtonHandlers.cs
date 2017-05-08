@@ -79,6 +79,24 @@ namespace WPFCalculator
             currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
         }
 
+        public void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
+        {
+            if (calculator.CurrentSubTotal != 0)
+            {
+                calculator.CurrentSubTotal = calcOps.Division(calculator.CurrentSubTotal, calculator.CurrentDigit);
+            }
+            else
+            {
+                calculator.CurrentSubTotal = calculator.CurrentDigit;
+            }
+
+            calculator.OperationString += calculator.CurrentDigit + " / ";
+            calcOps.DigitEntrySet = false;
+            ClearCurrentDigit(calculator);
+            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            currentOperation = CalculatorOperations.CurrentOperation.Division;
+        }
+
         private void ClearCurrentDigit(Calculator calculator)
         {
             calculator.CurrentDigit = 0;
