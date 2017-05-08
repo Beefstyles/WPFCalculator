@@ -56,6 +56,10 @@ namespace WPFCalculator
                     case ("Equals"):
                         HandleEquals();
                         break;
+                    case ("Division"):
+                        break;
+                    case ("Multiplication"):
+                        break;
                     default:
                         MessageBox.Show("Not implemented");
                         break;
