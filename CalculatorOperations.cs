@@ -58,22 +58,23 @@ namespace WPFCalculator
 
         private bool digitEntrySet;
 
-        public int Addition(int a, int b)
+        public double Addition(double a, double b)
         {
-            int result = a + b;
+            double result = a + b;
             return result;
         }
 
-        public int Subtraction(int a, int b)
+        public double Subtraction(double a, double b)
         {
-            int result = a - b;
+            double result = a - b;
             return result;
         }
 
-        public int Multiplication(int a, int b)
+        public double Multiplication(double a, double b)
         {
-            int result = a * b;
+            double result = a * b;
             return result;
         }
+
     }
 }

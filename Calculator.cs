@@ -33,7 +33,7 @@ namespace WPFCalculator
             }
         }
 
-        public int CurrentDigit
+        public double CurrentDigit
         {
             get {return currentDigit; }
 
@@ -58,7 +58,7 @@ namespace WPFCalculator
             }
         }
 
-        public int CurrentSubTotal
+        public double CurrentSubTotal
         {
             get
             {
@@ -71,9 +71,9 @@ namespace WPFCalculator
         }
 
 
-        private int currentSubTotal;
+        private double currentSubTotal;
 
-        private int currentDigit;
+        private double currentDigit;
 
         private int secondDigit;
 
