@@ -58,6 +58,24 @@ namespace WPFCalculator
             calculator.CurrentSubTotal = 0;
         }
 
+        public void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
+        {
+            if (calculator.CurrentSubTotal != 0)
+            {
+                calculator.CurrentSubTotal = calcOps.Multiplication(calculator.CurrentSubTotal, calculator.CurrentDigit);
+            }
+            else
+            {
+                calculator.CurrentSubTotal = calculator.CurrentDigit;
+            }
+            
+            calculator.OperationString += calculator.CurrentDigit + " * ";
+            calcOps.DigitEntrySet = false;
+            ClearCurrentDigit(calculator);
+            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
+        }
+
         private void ClearCurrentDigit(Calculator calculator)
         {
             calculator.CurrentDigit = 0;

@@ -59,6 +59,7 @@ namespace WPFCalculator
                     case ("Division"):
                         break;
                     case ("Multiplication"):
+                        HandleMultiplication();
                         break;
                     default:
                         MessageBox.Show("Not implemented");
@@ -96,13 +97,22 @@ namespace WPFCalculator
             calcButtonHandlers.HandleAddition(calculator, calcOps);
         }
 
-
         private void HandleSubtraction()
         {
             calcButtonHandlers.HandleSubtraction(calculator, calcOps);
         }
 
         private void HandleEquals()
+        {
+            calcButtonHandlers.HandleEquals(calculator, calcOps);
+        }
+
+        private void HandleMultiplication()
+        {
+            calcButtonHandlers.HandleMultiplication(calculator, calcOps);
+        }
+
+        private void HandleDivision()
         {
             calcButtonHandlers.HandleEquals(calculator, calcOps);
         }
