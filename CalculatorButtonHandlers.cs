@@ -49,6 +49,9 @@ namespace WPFCalculator
                 case (CalculatorOperations.CurrentOperation.Subtraction):
                     HandleSubtraction(calculator, calcOps);
                     break;
+                case (CalculatorOperations.CurrentOperation.Multiplication):
+                    HandleMultiplication(calculator, calcOps);
+                    break;
             }
             calculator.OperationString = "";
             ClearCurrentDigit(calculator);
