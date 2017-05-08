@@ -24,7 +24,7 @@ namespace WPFCalculator
         CalculatorButtonHandlers calcButtonHandlers = new CalculatorButtonHandlers();
         Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, SecondDigit = 0 };
         CalculatorOperations calcOps = new CalculatorOperations();
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -61,7 +61,7 @@ namespace WPFCalculator
                         break;
                 }
             }
-            
+
             calcOps.ArithemticDone = true;
         }
 
@@ -70,7 +70,7 @@ namespace WPFCalculator
             var numberButton = sender as Button;
             calcOps.DigitEntrySet = true;
             string newValue;
-            if(calculator.ResultsString == "0")
+            if (calculator.ResultsString == "0")
             {
                 newValue = numberButton.Tag.ToString();
             }
@@ -91,7 +91,7 @@ namespace WPFCalculator
         {
             calcButtonHandlers.HandleAddition(calculator, calcOps);
         }
-        
+
 
         private void HandleSubtraction()
         {
@@ -100,23 +100,7 @@ namespace WPFCalculator
 
         private void HandleEquals()
         {
-            switch (calcButtonHandlers.currentOperation)
-            {
-                case (CalculatorOperations.CurrentOperation.Addition):
-                    HandleAddition();
-                    break;
-                case (CalculatorOperations.CurrentOperation.Subtraction):
-                    HandleSubtraction();
-                    break;
-            }
-            calculator.OperationString = "";
-            ClearCurrentDigit();
-            calcOps.DigitEntrySet = false;
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
-            calcButtonHandlers.currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
-            calculator.CurrentSubTotal = 0;
+            calcButtonHandlers.HandleEquals(calculator, calcOps);
         }
     }
-
-    
 }

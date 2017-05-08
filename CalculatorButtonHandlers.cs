@@ -39,9 +39,29 @@ namespace WPFCalculator
             currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
         }
 
+        public void HandleEquals(Calculator calculator, CalculatorOperations calcOps)
+        {
+            switch (currentOperation)
+            {
+                case (CalculatorOperations.CurrentOperation.Addition):
+                    HandleAddition(calculator, calcOps);
+                    break;
+                case (CalculatorOperations.CurrentOperation.Subtraction):
+                    HandleSubtraction(calculator, calcOps);
+                    break;
+            }
+            calculator.OperationString = "";
+            ClearCurrentDigit(calculator);
+            calcOps.DigitEntrySet = false;
+            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
+            calculator.CurrentSubTotal = 0;
+        }
+
         private void ClearCurrentDigit(Calculator calculator)
         {
             calculator.CurrentDigit = 0;
         }
+
     }
 }
