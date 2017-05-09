@@ -9,7 +9,11 @@ namespace WPFCalculator
 {
     public class Calculator : INotifyPropertyChanged
     {
+
+        private bool isNegated;
+
         private string operationString;
+
 
         public string OperationString
         {
@@ -70,6 +74,18 @@ namespace WPFCalculator
             }
         }
 
+        public bool IsNegated
+        {
+            get
+            {
+                return isNegated;
+            }
+
+            set
+            {
+                isNegated = value;
+            }
+        }
 
         private double currentSubTotal;
 

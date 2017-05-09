@@ -16,7 +16,7 @@ namespace WPFCalculator
             calculator.OperationString += calculator.CurrentDigit + " + ";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            SetResultsString(calculator);
             currentOperation = CalculatorOperations.CurrentOperation.Addition;
         }
 
@@ -34,7 +34,7 @@ namespace WPFCalculator
             calculator.OperationString += calculator.CurrentDigit + " - ";
             calcOps.DigitEntrySet = false;
 
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            SetResultsString(calculator);
             ClearCurrentDigit(calculator);
             currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
         }
@@ -59,7 +59,7 @@ namespace WPFCalculator
             calculator.OperationString = "";
             ClearCurrentDigit(calculator);
             calcOps.DigitEntrySet = false;
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            SetResultsString(calculator);
             currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
             calculator.CurrentSubTotal = 0;
         }
@@ -103,29 +103,21 @@ namespace WPFCalculator
 
         public void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
         {
-            if (calculator.CurrentSubTotal != 0)
-            {
-                if(currentOperation == CalculatorOperations.CurrentOperation.NoOperation)
-                {
-                    calculator.CurrentSubTotal = calculator.CurrentSubTotal * -1;
-                }
-                else
-                {
-                    calculator.CurrentSubTotal = calculator.CurrentDigit * -1;
-                }
-            }
-            else
-            {
-                calculator.CurrentSubTotal = -calculator.CurrentDigit;
-            }
+            double toNegate = double.Parse(calculator.ResultsString);
+            toNegate = toNegate * -1;
+            calculator.ResultsString = toNegate.ToString();
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
         }
 
         private void ClearCurrentDigit(Calculator calculator)
         {
             calculator.CurrentDigit = 0;
+        }
+
+        public void SetResultsString(Calculator calculator)
+        {
+            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
         }
 
     }

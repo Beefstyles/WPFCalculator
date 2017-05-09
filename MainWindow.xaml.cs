@@ -22,8 +22,10 @@ namespace WPFCalculator
     public partial class MainWindow : Window
     {
         CalculatorButtonHandlers calcButtonHandlers = new CalculatorButtonHandlers();
-        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, SecondDigit = 0 };
+        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, SecondDigit = 0, IsNegated = false };
         CalculatorOperations calcOps = new CalculatorOperations();
+        private int numberButtonDigit;
+        private int digitToSend;
 
         public MainWindow()
         {
@@ -34,9 +36,9 @@ namespace WPFCalculator
             calcButtonHandlers.currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
         }
 
-        private void UpdateCurrentOperationString(string digit)
+        private void UpdateCurrentOperationString(string currentDigitValue)
         {
-            calculator.ResultsString = digit.ToString();
+            calculator.ResultsString = currentDigitValue.ToString();
         }
 
 
@@ -87,7 +89,7 @@ namespace WPFCalculator
                 newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
                 newValue = newValue.Replace("0", string.Empty);
             }
-            int numberButtonDigit;
+            ;
             calcOps.DigitEntrySet = true;
             int.TryParse(newValue, out numberButtonDigit);
             calculator.CurrentDigit = numberButtonDigit;
@@ -122,7 +124,17 @@ namespace WPFCalculator
 
         private void HandleNegation()
         {
-            calcButtonHandlers.HandleNegation(calculator, calcOps);
+            if (calcOps.DigitEntrySet)
+            {
+                calculator.CurrentDigit *= -1;
+                UpdateCurrentOperationString(calculator.CurrentDigit.ToString());
+            }
+            else
+            {
+                calculator.CurrentSubTotal *= -1;
+                calcButtonHandlers.SetResultsString(calculator);
+            }
+               
         }
     }
 }
