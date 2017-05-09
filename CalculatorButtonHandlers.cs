@@ -101,6 +101,28 @@ namespace WPFCalculator
             currentOperation = CalculatorOperations.CurrentOperation.Division;
         }
 
+        public void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
+        {
+            if (calculator.CurrentSubTotal != 0)
+            {
+                if(currentOperation == CalculatorOperations.CurrentOperation.NoOperation)
+                {
+                    calculator.CurrentSubTotal = calculator.CurrentSubTotal * -1;
+                }
+                else
+                {
+                    calculator.CurrentSubTotal = calculator.CurrentDigit * -1;
+                }
+            }
+            else
+            {
+                calculator.CurrentSubTotal = -calculator.CurrentDigit;
+            }
+            calcOps.DigitEntrySet = false;
+            ClearCurrentDigit(calculator);
+            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+        }
+
         private void ClearCurrentDigit(Calculator calculator)
         {
             calculator.CurrentDigit = 0;

@@ -62,6 +62,9 @@ namespace WPFCalculator
                     case ("Multiplication"):
                         HandleMultiplication();
                         break;
+                    case ("Negation"):
+                        HandleNegation();
+                        break;
                     default:
                         MessageBox.Show("Not implemented");
                         break;
@@ -115,6 +118,11 @@ namespace WPFCalculator
         private void HandleDivision()
         {
             calcButtonHandlers.HandleDivision(calculator, calcOps);
+        }
+
+        private void HandleNegation()
+        {
+            calcButtonHandlers.HandleNegation(calculator, calcOps);
         }
     }
 }
