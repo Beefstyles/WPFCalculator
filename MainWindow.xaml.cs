@@ -75,6 +75,20 @@ namespace WPFCalculator
             calcOps.ArithemticDone = true;
         }
 
+        private void GeneralButtonHandler(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            switch (button.Name)
+            {
+                case ("Negation"):
+                    HandleNegation();
+                    break;
+                default:
+                    MessageBox.Show("Not implemented");
+                    break;
+            }
+        }
+
         private void NumberEntryHandler(object sender, RoutedEventArgs e)
         {
             var numberButton = sender as Button;
@@ -133,6 +147,7 @@ namespace WPFCalculator
             {
                 calculator.CurrentSubTotal *= -1;
                 calcButtonHandlers.SetResultsString(calculator);
+                Console.WriteLine("Current sub" + calculator.CurrentSubTotal);
             }
                
         }
