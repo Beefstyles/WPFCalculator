@@ -61,7 +61,7 @@ namespace WPFCalculator
             calcOps.DigitEntrySet = false;
             SetResultsString(calculator, false);
             currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
-            calculator.CurrentSubTotal = 0;
+            //calculator.CurrentSubTotal = 0;
         }
 
         public void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
@@ -111,8 +111,7 @@ namespace WPFCalculator
             }
             else
             {
-                Console.WriteLine("Current sub" + calculator.CurrentSubTotal);
-                //calculator.CurrentSubTotal *= -1;
+                calculator.CurrentSubTotal *= -1;
                 SetResultsString(calculator, false);
 
             }
