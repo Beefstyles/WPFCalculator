@@ -64,9 +64,6 @@ namespace WPFCalculator
                     case ("Multiplication"):
                         HandleMultiplication();
                         break;
-                    case ("Negation"):
-                        HandleNegation();
-                        break;
                     default:
                         MessageBox.Show("Not implemented");
                         break;
@@ -138,18 +135,7 @@ namespace WPFCalculator
 
         private void HandleNegation()
         {
-            if (calcOps.DigitEntrySet)
-            {
-                calculator.CurrentDigit *= -1;
-                UpdateCurrentOperationString(calculator.CurrentDigit.ToString());
-            }
-            else
-            {
-                calculator.CurrentSubTotal *= -1;
-                calcButtonHandlers.SetResultsString(calculator);
-                Console.WriteLine("Current sub" + calculator.CurrentSubTotal);
-            }
-               
+            calcButtonHandlers.HandleNegation(calculator, calcOps);
         }
     }
 }

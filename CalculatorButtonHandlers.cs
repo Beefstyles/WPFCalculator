@@ -16,7 +16,7 @@ namespace WPFCalculator
             calculator.OperationString += calculator.CurrentDigit + " + ";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
-            SetResultsString(calculator);
+            SetResultsString(calculator, false);
             currentOperation = CalculatorOperations.CurrentOperation.Addition;
         }
 
@@ -34,7 +34,7 @@ namespace WPFCalculator
             calculator.OperationString += calculator.CurrentDigit + " - ";
             calcOps.DigitEntrySet = false;
 
-            SetResultsString(calculator);
+            SetResultsString(calculator, false);
             ClearCurrentDigit(calculator);
             currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
         }
@@ -59,7 +59,7 @@ namespace WPFCalculator
             calculator.OperationString = "";
             ClearCurrentDigit(calculator);
             calcOps.DigitEntrySet = false;
-            SetResultsString(calculator);
+            SetResultsString(calculator, false);
             currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
             calculator.CurrentSubTotal = 0;
         }
@@ -79,6 +79,7 @@ namespace WPFCalculator
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
             calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            Console.WriteLine("Current sub" + calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
         }
 
@@ -103,11 +104,18 @@ namespace WPFCalculator
 
         public void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
         {
-            double toNegate = double.Parse(calculator.ResultsString);
-            toNegate = toNegate * -1;
-            calculator.ResultsString = toNegate.ToString();
-            calcOps.DigitEntrySet = false;
-            ClearCurrentDigit(calculator);
+            if (calcOps.DigitEntrySet)
+            {
+                calculator.CurrentDigit *= -1;
+                SetResultsString(calculator, true);
+            }
+            else
+            {
+                Console.WriteLine("Current sub" + calculator.CurrentSubTotal);
+                calculator.CurrentSubTotal *= -1;
+                SetResultsString(calculator, false);
+
+            }
         }
 
         private void ClearCurrentDigit(Calculator calculator)
@@ -115,10 +123,20 @@ namespace WPFCalculator
             calculator.CurrentDigit = 0;
         }
 
-        public void SetResultsString(Calculator calculator)
+        public void SetResultsString(Calculator calculator, bool digitToBeSet)
         {
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            if (digitToBeSet)
+            {
+                calculator.ResultsString = calculator.CurrentDigit.ToString();
+            }
+            else
+            {
+                calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            }
+            
         }
+
+
 
     }
 }
