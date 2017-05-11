@@ -112,7 +112,7 @@ namespace WPFCalculator
             else
             {
                 Console.WriteLine("Current sub" + calculator.CurrentSubTotal);
-                calculator.CurrentSubTotal *= -1;
+                //calculator.CurrentSubTotal *= -1;
                 SetResultsString(calculator, false);
 
             }
