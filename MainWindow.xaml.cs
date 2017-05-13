@@ -45,6 +45,7 @@ namespace WPFCalculator
         private void ArithmeticHandler(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
+            
             if (!calcOps.ArithemticDone)
             {
                 switch (button.Name)
@@ -62,6 +63,7 @@ namespace WPFCalculator
                         HandleDivision();
                         break;
                     case ("Multiplication"):
+                        Console.WriteLine("Trying arith");
                         HandleMultiplication();
                         break;
                     default:
@@ -82,6 +84,9 @@ namespace WPFCalculator
                     break;
                 case ("Clear"):
                     HandleClear();
+                    break;
+                case ("RemoveDigit"):
+                    HandleRemoveDigit();
                     break;
                 default:
                     MessageBox.Show("Not implemented");
@@ -142,6 +147,11 @@ namespace WPFCalculator
         }
 
         private void HandleClear()
+        {
+            calcButtonHandlers.HandleClear(calculator);
+        }
+
+        private void HandleRemoveDigit()
         {
             calcButtonHandlers.HandleClear(calculator);
         }

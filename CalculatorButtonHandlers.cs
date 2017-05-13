@@ -55,9 +55,6 @@ namespace WPFCalculator
                     break;
             }
             calculator.OperationString = "";
-            //ClearCurrentDigit(calculator);
-            //calcOps.DigitEntrySet = false;
-            //SetResultsString(calculator, false);
             currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
             //calculator.CurrentSubTotal = 0;
         }
@@ -140,6 +137,11 @@ namespace WPFCalculator
             calculator.OperationString = "";
             calculator.CurrentDigit = 0;
             calculator.CurrentSubTotal = 0;
+        }
+
+        public void HandleRemoveDigit(Calculator calculator)
+        {
+            
         }
 
 
