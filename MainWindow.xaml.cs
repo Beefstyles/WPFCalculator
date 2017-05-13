@@ -80,6 +80,9 @@ namespace WPFCalculator
                 case ("Negation"):
                     HandleNegation();
                     break;
+                case ("Clear"):
+                    HandleClear();
+                    break;
                 default:
                     MessageBox.Show("Not implemented");
                     break;
@@ -136,6 +139,11 @@ namespace WPFCalculator
         private void HandleNegation()
         {
             calcButtonHandlers.HandleNegation(calculator, calcOps);
+        }
+
+        private void HandleClear()
+        {
+            calcButtonHandlers.HandleClear(calculator);
         }
     }
 }

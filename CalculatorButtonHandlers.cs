@@ -66,6 +66,7 @@ namespace WPFCalculator
 
         public void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
         {
+            Console.WriteLine("Multu");
             if (calculator.CurrentSubTotal != 0)
             {
                 calculator.CurrentSubTotal = calcOps.Multiplication(calculator.CurrentSubTotal, calculator.CurrentDigit);
@@ -74,12 +75,12 @@ namespace WPFCalculator
             {
                 calculator.CurrentSubTotal = calculator.CurrentDigit;
             }
-            
+
             calculator.OperationString += calculator.CurrentDigit + " * ";
             calcOps.DigitEntrySet = false;
-            ClearCurrentDigit(calculator);
+            //ClearCurrentDigit(calculator);
             calculator.ResultsString = calculator.CurrentSubTotal.ToString();
-            Console.WriteLine("Current sub" + calculator.CurrentSubTotal);
+            Console.WriteLine("Current sub: " + calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
         }
 
@@ -133,6 +134,13 @@ namespace WPFCalculator
                 calculator.ResultsString = calculator.CurrentSubTotal.ToString();
             }
             
+        }
+
+        public void HandleClear(Calculator calculator)
+        {
+            calculator.ResultsString = "";
+            calculator.CurrentDigit = 0;
+            calculator.CurrentSubTotal = 0;
         }
 
 
