@@ -109,7 +109,6 @@ namespace WPFCalculator
             {
                 calculator.CurrentSubTotal *= -1;
                 SetResultsString(calculator, false);
-
             }
         }
 
@@ -126,6 +125,7 @@ namespace WPFCalculator
             }
             else
             {
+                calculator.CurrentSubTotal = Math.Round(calculator.CurrentSubTotal, 7);
                 calculator.ResultsString = calculator.CurrentSubTotal.ToString();
             }
             
