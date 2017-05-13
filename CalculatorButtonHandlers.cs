@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WPFCalculator
 {
@@ -57,9 +55,9 @@ namespace WPFCalculator
                     break;
             }
             calculator.OperationString = "";
-            ClearCurrentDigit(calculator);
-            calcOps.DigitEntrySet = false;
-            SetResultsString(calculator, false);
+            //ClearCurrentDigit(calculator);
+            //calcOps.DigitEntrySet = false;
+            //SetResultsString(calculator, false);
             currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
             //calculator.CurrentSubTotal = 0;
         }
@@ -78,8 +76,8 @@ namespace WPFCalculator
 
             calculator.OperationString += calculator.CurrentDigit + " * ";
             calcOps.DigitEntrySet = false;
-            //ClearCurrentDigit(calculator);
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            ClearCurrentDigit(calculator);
+            SetResultsString(calculator, false);
             Console.WriteLine("Current sub: " + calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
         }
@@ -99,7 +97,7 @@ namespace WPFCalculator
             calculator.OperationString += calculator.CurrentDigit + " / ";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
-            calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+            SetResultsString(calculator, false);
             currentOperation = CalculatorOperations.CurrentOperation.Division;
         }
 
@@ -138,7 +136,8 @@ namespace WPFCalculator
 
         public void HandleClear(Calculator calculator)
         {
-            calculator.ResultsString = "";
+            calculator.ResultsString = "0";
+            calculator.OperationString = "";
             calculator.CurrentDigit = 0;
             calculator.CurrentSubTotal = 0;
         }
