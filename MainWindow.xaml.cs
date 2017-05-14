@@ -25,7 +25,7 @@ namespace WPFCalculator
         Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, SecondDigit = 0, IsNegated = false };
         CalculatorOperations calcOps = new CalculatorOperations();
         private int numberButtonDigit;
-        private int digitToSend;
+        private bool ArithemticDone;
 
         public MainWindow()
         {
@@ -52,26 +52,30 @@ namespace WPFCalculator
                 {
                     case ("Addition"):
                         HandleAddition();
+                        calcOps.ArithemticDone = true;
                         break;
                     case ("Subtraction"):
                         HandleSubtraction();
+                        calcOps.ArithemticDone = true;
                         break;
                     case ("Equals"):
                         HandleEquals();
+                        calcOps.ArithemticDone = false;
                         break;
                     case ("Division"):
                         HandleDivision();
+                        calcOps.ArithemticDone = true;
                         break;
                     case ("Multiplication"):
-                        Console.WriteLine("Trying arith");
                         HandleMultiplication();
+                        calcOps.ArithemticDone = true;
                         break;
                     default:
                         MessageBox.Show("Not implemented");
                         break;
                 }
             }
-            calcOps.ArithemticDone = true;
+            
         }
 
         private void GeneralButtonHandler(object sender, RoutedEventArgs e)
