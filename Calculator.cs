@@ -87,6 +87,21 @@ namespace WPFCalculator
             }
         }
 
+        public bool OperationSet
+        {
+            get
+            {
+                return operationSet;
+            }
+
+            set
+            {
+                operationSet = value;
+            }
+        }
+
+        private bool operationSet;
+
         private double currentSubTotal;
 
         private double currentDigit;
