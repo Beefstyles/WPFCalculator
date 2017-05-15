@@ -11,7 +11,7 @@ namespace WPFCalculator
     {
         public enum CurrentOperation
         {
-            Addition, Subtraction, Multiplication, Division, NoOperation
+            Addition, Subtraction, Multiplication, Division, SquareRoot, NoOperation
         };
         private bool arithemticDone;
 

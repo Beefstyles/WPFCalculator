@@ -67,8 +67,10 @@ namespace WPFCalculator
                         calcOps.ArithemticDone = true;
                         break;
                     case ("Multiplication"):
-                        Console.WriteLine("Trying arith");
                         HandleMultiplication();
+                        break;
+                    case ("SquareRoot"):
+                        HandleSqrt();
                         break;
                     default:
                         MessageBox.Show("Not implemented");
@@ -158,6 +160,11 @@ namespace WPFCalculator
         private void HandleRemoveDigit()
         {
             calcButtonHandlers.HandleClear(calculator);
+        }
+
+        private void HandleSqrt()
+        {
+            calcButtonHandlers.HandleSquareRoot(calculator,calcOps);
         }
     }
 }

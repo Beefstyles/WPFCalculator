@@ -83,6 +83,30 @@ namespace WPFCalculator
 
         }
 
+        public void HandleSquareRoot(Calculator calculator, CalculatorOperations calcOps)
+        {
+            double numberToBeActioned;
+            if (calcOps.DigitEntrySet)
+            {
+                numberToBeActioned = calculator.CurrentDigit;
+                calculator.CurrentDigit = Math.Sqrt(calculator.CurrentDigit);
+                SetResultsString(calculator, true);
+                
+            }
+            else
+            {
+                numberToBeActioned = calculator.CurrentSubTotal;
+                calculator.CurrentSubTotal = Math.Sqrt(calculator.CurrentDigit);
+                SetResultsString(calculator, false);
+            }
+
+            calculator.OperationString += "√(" + numberToBeActioned + ")";
+            calcOps.DigitEntrySet = false;
+            ClearCurrentDigit(calculator);
+            SetResultsString(calculator, false);
+            currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
+        }
+
         public void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
         {
             if (calculator.CurrentSubTotal != 0)
@@ -129,7 +153,7 @@ namespace WPFCalculator
             }
             else
             {
-                //calculator.CurrentSubTotal = Math.Round(calculator.CurrentSubTotal, 7);
+                calculator.CurrentSubTotal = Math.Round(calculator.CurrentSubTotal, 7);
                 calculator.ResultsString = calculator.CurrentSubTotal.ToString();
             }
             
