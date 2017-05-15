@@ -18,6 +18,24 @@ namespace WPFCalculator
             currentOperation = CalculatorOperations.CurrentOperation.Addition;
         }
 
+        public void PerformOperation(Calculator calculator, CalculatorOperations calcOps)
+        {
+            switch (currentOperation)
+            {
+                case (CalculatorOperations.CurrentOperation.Addition):
+                    HandleAddition(calculator, calcOps);
+                    break;
+                case (CalculatorOperations.CurrentOperation.Subtraction):
+                    HandleSubtraction(calculator, calcOps);
+                    break;
+                case (CalculatorOperations.CurrentOperation.Multiplication):
+                    HandleMultiplication(calculator, calcOps);
+                    break;
+                case (CalculatorOperations.CurrentOperation.Division):
+                    HandleDivision(calculator, calcOps);
+                    break;
+            }
+        }
         public void HandleSubtraction(Calculator calculator, CalculatorOperations calcOps)
         {
             if (calculator.CurrentSubTotal != 0)
@@ -39,23 +57,10 @@ namespace WPFCalculator
 
         public void HandleEquals(Calculator calculator, CalculatorOperations calcOps)
         {
-            switch (currentOperation)
-            {
-                case (CalculatorOperations.CurrentOperation.Addition):
-                    HandleAddition(calculator, calcOps);
-                    break;
-                case (CalculatorOperations.CurrentOperation.Subtraction):
-                    HandleSubtraction(calculator, calcOps);
-                    break;
-                case (CalculatorOperations.CurrentOperation.Multiplication):
-                    HandleMultiplication(calculator, calcOps);
-                    break;
-                case (CalculatorOperations.CurrentOperation.Division):
-                    HandleDivision(calculator, calcOps);
-                    break;
-            }
+            PerformOperation(calculator, calcOps);
             calculator.OperationString = "";
             currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
+            calculator.OperationSet = true;
             Console.WriteLine("Current sub equals: " + calculator.CurrentSubTotal);
         }
 
@@ -67,15 +72,15 @@ namespace WPFCalculator
             }
             else
             {
-                Console.WriteLine("Multu");
                 calculator.CurrentSubTotal = calculator.CurrentDigit;
             }
-
+            calculator.OperationSet = true;
             calculator.OperationString += calculator.CurrentDigit + " * ";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
             SetResultsString(calculator, false);
             currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
+
         }
 
         public void HandleDivision(Calculator calculator, CalculatorOperations calcOps)

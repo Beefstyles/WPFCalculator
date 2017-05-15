@@ -22,7 +22,7 @@ namespace WPFCalculator
     public partial class MainWindow : Window
     {
         CalculatorButtonHandlers calcButtonHandlers = new CalculatorButtonHandlers();
-        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, SecondDigit = 0, IsNegated = false, OperationSet = false };
+        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, SecondDigit = 0, IsNegated = false };
         CalculatorOperations calcOps = new CalculatorOperations();
         private int numberButtonDigit;
         private bool ArithemticDone;
@@ -109,15 +109,10 @@ namespace WPFCalculator
             }
             else
             {
-                if (!calculator.OperationSet)
-                {
-
-                }
                 newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
                 newValue = newValue.Replace("0", string.Empty);
             }
-
-            
+            ;
             calcOps.DigitEntrySet = true;
             int.TryParse(newValue, out numberButtonDigit);
             calculator.CurrentDigit = numberButtonDigit;
