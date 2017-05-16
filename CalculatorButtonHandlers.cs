@@ -112,7 +112,7 @@ namespace WPFCalculator
             if (calcOps.DigitEntrySet)
             {
                 numberToBeActioned = calculator.CurrentDigit;
-                calculator.CurrentSubTotal = 1/(calculator.CurrentDigit);
+                calculator.CurrentSubTotal = 1 / (calculator.CurrentDigit);
                 SetResultsString(calculator, false, calculator.CurrentSubTotal);
             }
             else

@@ -172,7 +172,7 @@ namespace WPFCalculator
 
         private void HandleReciprocal()
         {
-            calcButtonHandlers.HandleReciprocal(calculator, calcOps);
+            calcButtonHandlers.HandleRemoveDigit(calculator);
         }
     }
 }

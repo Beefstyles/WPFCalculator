@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFCalculator"
         mc:Ignorable="d"
-        Title="WPF Calculator" HorizontalAlignment="Center" Height="380" Width="240">
+        Title="WPF Calculator" HorizontalAlignment="Center" Height="380" Width="240"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="CalcButton" TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="5"/>
