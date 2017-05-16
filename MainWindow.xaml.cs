@@ -162,7 +162,7 @@ namespace WPFCalculator
 
         private void HandleRemoveDigit()
         {
-            calcButtonHandlers.HandleClear(calculator);
+            calcButtonHandlers.HandleRemoveDigit(calculator, calcOps);
         }
 
         private void HandleSquareRoot()
@@ -172,7 +172,7 @@ namespace WPFCalculator
 
         private void HandleReciprocal()
         {
-            calcButtonHandlers.HandleRemoveDigit(calculator);
+            calcButtonHandlers.HandleReciprocal(calculator, calcOps);
         }
     }
 }

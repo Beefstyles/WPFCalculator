@@ -189,9 +189,26 @@ namespace WPFCalculator
             calculator.CurrentSubTotal = 0;
         }
 
-        public void HandleRemoveDigit(Calculator calculator)
+        public void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcops)
         {
-            
+            if (calcops.DigitEntrySet)
+            {
+                if(calculator.ResultsString.Length > 1)
+                {
+                    calculator.ResultsString = calculator.ResultsString.Remove(calculator.ResultsString.Length - 1);
+                    calculator.CurrentDigit = double.Parse(calculator.ResultsString);
+                    SetResultsString(calculator, true, calculator.CurrentDigit);
+                }
+                else
+                {
+                    calculator.CurrentDigit = 0;
+                    SetResultsString(calculator, true, calculator.CurrentDigit);
+                }                
+            }
+            else
+            {
+                //Make noise
+            }
         }
 
 
