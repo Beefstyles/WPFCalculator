@@ -94,11 +94,12 @@ namespace WPFCalculator
             }
             else
             {
-                numberToBeActioned = Math.Sqrt(calculator.CurrentSubTotal);
-                SetResultsString(calculator, false, numberToBeActioned);
+                numberToBeActioned = calculator.CurrentSubTotal;
+                calculator.CurrentSubTotal = Math.Sqrt(calculator.CurrentSubTotal);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
             }
 
-            calculator.OperationString += "√(" + numberToBeActioned + ")";
+            calculator.OperationString = "√(" + numberToBeActioned + ")";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
             SetResultsString(calculator, false, calculator.CurrentSubTotal);
