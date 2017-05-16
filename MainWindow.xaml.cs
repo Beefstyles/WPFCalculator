@@ -70,7 +70,10 @@ namespace WPFCalculator
                         HandleMultiplication();
                         break;
                     case ("SquareRoot"):
-                        HandleSqrt();
+                        HandleSquareRoot();
+                        break;
+                    case ("Reciproval"):
+                        HandleReciprocal();
                         break;
                     default:
                         MessageBox.Show("Not implemented");
@@ -162,9 +165,14 @@ namespace WPFCalculator
             calcButtonHandlers.HandleClear(calculator);
         }
 
-        private void HandleSqrt()
+        private void HandleSquareRoot()
         {
             calcButtonHandlers.HandleSquareRoot(calculator,calcOps);
+        }
+
+        private void HandleReciprocal()
+        {
+            calcButtonHandlers.HandleReciprocal(calculator, calcOps);
         }
     }
 }

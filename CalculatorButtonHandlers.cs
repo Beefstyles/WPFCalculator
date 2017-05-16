@@ -106,6 +106,29 @@ namespace WPFCalculator
             currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
         }
 
+        public void HandleReciprocal(Calculator calculator, CalculatorOperations calcOps)
+        {
+            double numberToBeActioned;
+            if (calcOps.DigitEntrySet)
+            {
+                numberToBeActioned = calculator.CurrentDigit;
+                calculator.CurrentSubTotal = 1/(calculator.CurrentDigit);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+            }
+            else
+            {
+                numberToBeActioned = calculator.CurrentSubTotal;
+                calculator.CurrentSubTotal = 1 / (calculator.CurrentSubTotal);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+            }
+
+            calculator.OperationString = "reciproc(" + numberToBeActioned + ")";
+            calcOps.DigitEntrySet = false;
+            ClearCurrentDigit(calculator);
+            SetResultsString(calculator, false, calculator.CurrentSubTotal);
+            currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
+        }
+
         public void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
         {
             if (calculator.CurrentSubTotal != 0)
