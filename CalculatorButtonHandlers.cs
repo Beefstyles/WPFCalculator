@@ -14,7 +14,7 @@ namespace WPFCalculator
             calculator.OperationString += calculator.CurrentDigit + " + ";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
-            SetResultsString(calculator, false);
+            SetResultsString(calculator, false, calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.Addition;
         }
 
@@ -50,7 +50,7 @@ namespace WPFCalculator
             calculator.OperationString += calculator.CurrentDigit + " - ";
             calcOps.DigitEntrySet = false;
 
-            SetResultsString(calculator, false);
+            SetResultsString(calculator, false, calculator.CurrentSubTotal);
             ClearCurrentDigit(calculator);
             currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
         }
@@ -78,7 +78,7 @@ namespace WPFCalculator
             calculator.OperationString += calculator.CurrentDigit + " * ";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
-            SetResultsString(calculator, false);
+            SetResultsString(calculator, false, calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
 
         }
@@ -89,21 +89,19 @@ namespace WPFCalculator
             if (calcOps.DigitEntrySet)
             {
                 numberToBeActioned = calculator.CurrentDigit;
-                calculator.CurrentDigit = Math.Sqrt(calculator.CurrentDigit);
-                SetResultsString(calculator, true);
-                
+                calculator.CurrentSubTotal = Math.Sqrt(calculator.CurrentDigit);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
             }
             else
             {
-                numberToBeActioned = calculator.CurrentSubTotal;
-                calculator.CurrentSubTotal = Math.Sqrt(calculator.CurrentDigit);
-                SetResultsString(calculator, false);
+                numberToBeActioned = Math.Sqrt(calculator.CurrentSubTotal);
+                SetResultsString(calculator, false, numberToBeActioned);
             }
 
             calculator.OperationString += "√(" + numberToBeActioned + ")";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
-            SetResultsString(calculator, false);
+            SetResultsString(calculator, false, calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
         }
 
@@ -122,7 +120,7 @@ namespace WPFCalculator
             calculator.OperationString += calculator.CurrentDigit + " / ";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
-            SetResultsString(calculator, false);
+            SetResultsString(calculator, false, calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.Division;
         }
 
@@ -131,12 +129,12 @@ namespace WPFCalculator
             if (calcOps.DigitEntrySet)
             {
                 calculator.CurrentDigit *= -1;
-                SetResultsString(calculator, true);
+                SetResultsString(calculator, true, calculator.CurrentDigit);
             }
             else
             {
                 calculator.CurrentSubTotal *= -1;
-                SetResultsString(calculator, false);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
             }
         }
 
@@ -145,16 +143,16 @@ namespace WPFCalculator
             calculator.CurrentDigit = 0;
         }
 
-        public void SetResultsString(Calculator calculator, bool digitToBeSet)
+        public void SetResultsString(Calculator calculator, bool digitToBeSet, double digitSent)
         {
             if (digitToBeSet)
             {
-                calculator.ResultsString = calculator.CurrentDigit.ToString();
+                calculator.ResultsString = digitSent.ToString();
             }
             else
             {
-                calculator.CurrentSubTotal = Math.Round(calculator.CurrentSubTotal, 7);
-                calculator.ResultsString = calculator.CurrentSubTotal.ToString();
+                digitSent = Math.Round(calculator.CurrentSubTotal, 7);
+                calculator.ResultsString = digitSent.ToString();
             }
             
         }
