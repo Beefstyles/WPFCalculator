@@ -181,12 +181,13 @@ namespace WPFCalculator
             }
         }
 
-        public void HandleClear(Calculator calculator)
+        public void HandleClear(Calculator calculator, CalculatorOperations calcOps)
         {
             calculator.ResultsString = "0";
             calculator.OperationString = "";
             calculator.CurrentDigit = 0;
             calculator.CurrentSubTotal = 0;
+            calcOps.DecimalUsed = false;
         }
 
         public void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcops)

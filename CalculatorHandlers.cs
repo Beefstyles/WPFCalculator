@@ -72,105 +72,110 @@ namespace WPFCalculator
         {
             calcOps.DigitEntrySet = true;
             string newValue;
-            if (numberButton.Tag.ToString() == ".")
+            if (calculator.ResultsString == "0")
             {
-                if (calcOps.DecimalUsed)
+                if (numberButton.Tag.ToString() == ".")
                 {
-                    SystemSounds.Exclamation.Play();
-                }
-            }
-            else
-            {
-                if (calculator.ResultsString == "0")
-                {
-                    if (numberButton.Tag.ToString() == ".")
+                    if (calcOps.DecimalUsed)
+                    {
+                        SystemSounds.Exclamation.Play();
+                        newValue = calculator.ResultsString;
+                    }
+                    else
                     {
                         newValue = "0" + numberButton.Tag.ToString() + "0";
                         calcOps.DecimalUsed = true;
                     }
+                }
+                else
+                {
+                    newValue = numberButton.Tag.ToString();
+                }
+            }
+            else
+            {
+                if (numberButton.Tag.ToString() == ".")
+                {
+                    if (calcOps.DecimalUsed)
+                    {
+                        SystemSounds.Exclamation.Play();
+                        newValue = calculator.ResultsString;
+                    }
                     else
                     {
-                        newValue = numberButton.Tag.ToString();
+                        newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString() + "0";
+                        calcOps.DecimalUsed = true;
                     }
                 }
                 else
                 {
-                    if (numberButton.Tag.ToString() == ".")
-                    {
-                        newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString() + "0";
-                    }
-                    else
-                    {
-                        newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
-                        newValue = newValue.Replace("0", string.Empty);
-                    }
-
+                    newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
+                    newValue = newValue.Replace("0", string.Empty);
                 }
-
-                calcOps.DigitEntrySet = true;
-                decimal.TryParse(newValue, out numberButtonDigit);
-                calculator.CurrentDigit = numberButtonDigit;
-                Console.WriteLine("CD " + numberButtonDigit);
-                UpdateCurrentOperationString(newValue, calculator);
-                calcOps.ArithemticDone = false;
             }
+
+            calcOps.DigitEntrySet = true;
+            decimal.TryParse(newValue, out numberButtonDigit);
+            calculator.CurrentDigit = numberButtonDigit;
+            Console.WriteLine("CD " + numberButtonDigit);
+            UpdateCurrentOperationString(newValue, calculator);
+            calcOps.ArithemticDone = false;
         }
 
 
-
-        public void UpdateCurrentOperationString(string currentDigitValue, Calculator calculator)
-        {
-            calculator.ResultsString = currentDigitValue.ToString();
-        }
-
-        private void HandleAddition(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleAddition(calculator, calcOps);
-        }
-
-        private void HandleSubtraction(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleSubtraction(calculator, calcOps);
-        }
-
-        private void HandleEquals(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleEquals(calculator, calcOps);
-        }
-
-        private void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleMultiplication(calculator, calcOps);
-        }
-
-        private void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleDivision(calculator, calcOps);
-        }
-
-        private void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleNegation(calculator, calcOps);
-        }
-
-        private void HandleClear(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleClear(calculator);
-        }
-
-        private void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleRemoveDigit(calculator, calcOps);
-        }
-
-        private void HandleSquareRoot(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleSquareRoot(calculator, calcOps);
-        }
-
-        private void HandleReciprocal(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calcButtonHandlers.HandleReciprocal(calculator, calcOps);
-        }
+    public void UpdateCurrentOperationString(string currentDigitValue, Calculator calculator)
+    {
+        calculator.ResultsString = currentDigitValue.ToString();
     }
+
+    private void HandleAddition(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleAddition(calculator, calcOps);
+    }
+
+    private void HandleSubtraction(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleSubtraction(calculator, calcOps);
+    }
+
+    private void HandleEquals(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleEquals(calculator, calcOps);
+    }
+
+    private void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleMultiplication(calculator, calcOps);
+    }
+
+    private void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleDivision(calculator, calcOps);
+    }
+
+    private void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleNegation(calculator, calcOps);
+    }
+
+    private void HandleClear(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleClear(calculator, calcOps);
+    }
+
+    private void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleRemoveDigit(calculator, calcOps);
+    }
+
+    private void HandleSquareRoot(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleSquareRoot(calculator, calcOps);
+    }
+
+    private void HandleReciprocal(Calculator calculator, CalculatorOperations calcOps)
+    {
+        calcButtonHandlers.HandleReciprocal(calculator, calcOps);
+    }
+}
 }

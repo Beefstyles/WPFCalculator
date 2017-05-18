@@ -27,7 +27,6 @@ namespace WPFCalculator
         CalculatorOperations calcOps = new CalculatorOperations();
         CalculatorHandlers calcHandlers = new CalculatorHandlers();
 
-
         public MainWindow()
         {
             InitializeComponent();
@@ -36,7 +35,6 @@ namespace WPFCalculator
             calculator.CurrentSubTotal = 0;
             calcOps.DecimalUsed = false;
         }
-
 
         private void ArithmeticHandler(object sender, RoutedEventArgs e)
         {
@@ -55,7 +53,5 @@ namespace WPFCalculator
             var numberButton = sender as Button;
             calcHandlers.NumberEntryHandler(numberButton, calculator, calcOps);
         }
-
-
     }
 }
