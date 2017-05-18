@@ -79,7 +79,7 @@ namespace WPFCalculator
             }
             else
             {
-                if (calculator.ResultsString == "0")
+                if (calculator.CurrentDigit.ToString() == "0")
                 {
                     if (numberButton.Tag.ToString() == ".")
                     {
@@ -97,6 +97,10 @@ namespace WPFCalculator
                     else
                     {
                         newValue = numberButton.Tag.ToString();
+                        if (newValue.Length <= 1)
+                        {
+                            newValue = newValue.Replace("0", string.Empty);
+                        }
                     }
                 }
                 else
@@ -116,10 +120,12 @@ namespace WPFCalculator
                     }
                     else
                     {
-
                         newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
-                        newValue = newValue.Replace("0", string.Empty);
-
+                        if(newValue.Length <= 1)
+                        {
+                            newValue = newValue.Replace("0", string.Empty);
+                        }
+                        
                     }
                 }
 
