@@ -102,6 +102,7 @@ namespace WPFCalculator
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
             SetResultsString(calculator, false, calculator.CurrentSubTotal);
+            checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
             currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
         }
 
@@ -126,6 +127,7 @@ namespace WPFCalculator
             ClearCurrentDigit(calculator);
             SetResultsString(calculator, false, calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
+            checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
         }
 
         public void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
@@ -145,6 +147,7 @@ namespace WPFCalculator
             ClearCurrentDigit(calculator);
             SetResultsString(calculator, false, calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.Division;
+            checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
         }
 
         public void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
@@ -211,6 +214,17 @@ namespace WPFCalculator
         }
 
 
+        private void checkIfDecimal(CalculatorOperations calcops, string result)
+        {
+            if (result.ToLower().Contains('.'))
+            {
+                calcops.DecimalUsed = true;
+            }
+            else
+            {
+                calcops.DecimalUsed = false;
+            }
+        }
 
     }
 }

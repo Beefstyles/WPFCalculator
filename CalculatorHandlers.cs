@@ -67,7 +67,6 @@ namespace WPFCalculator
             }
         }
 
-
         public void NumberEntryHandler(Button numberButton, Calculator calculator, CalculatorOperations calcOps)
         {
             calcOps.DigitEntrySet = true;
