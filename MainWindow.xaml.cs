@@ -22,7 +22,7 @@ namespace WPFCalculator
     public partial class MainWindow : Window
     {
         CalculatorButtonHandlers calcButtonHandlers = new CalculatorButtonHandlers();
-        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, SecondDigit = 0, IsNegated = false };
+        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0 };
         CalculatorOperations calcOps = new CalculatorOperations();
         private int numberButtonDigit;
         private bool ArithemticDone;

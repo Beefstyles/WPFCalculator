@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 
 namespace WPFCalculator
 {
@@ -178,7 +179,6 @@ namespace WPFCalculator
                 digitSent = Math.Round(calculator.CurrentSubTotal, 7);
                 calculator.ResultsString = digitSent.ToString();
             }
-            
         }
 
         public void HandleClear(Calculator calculator)
@@ -207,7 +207,7 @@ namespace WPFCalculator
             }
             else
             {
-                //Make noise
+                SystemSounds.Exclamation.Play();
             }
         }
 

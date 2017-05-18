@@ -48,19 +48,6 @@ namespace WPFCalculator
             }
         }
 
-        public int SecondDigit
-        {
-            get
-            {
-                return secondDigit;
-            }
-
-            set
-            {
-                secondDigit = value;
-                NotifyPropertyChanged("SecondDigit");
-            }
-        }
 
         public double CurrentSubTotal
         {
@@ -71,19 +58,6 @@ namespace WPFCalculator
             set
             {
                 currentSubTotal = value;
-            }
-        }
-
-        public bool IsNegated
-        {
-            get
-            {
-                return isNegated;
-            }
-
-            set
-            {
-                isNegated = value;
             }
         }
 
