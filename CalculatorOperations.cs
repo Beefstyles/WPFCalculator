@@ -13,6 +13,7 @@ namespace WPFCalculator
         {
             Addition, Subtraction, Multiplication, Division, SquareRoot, NoOperation
         };
+        
         private bool arithemticDone;
 
         public bool ArithemticDone

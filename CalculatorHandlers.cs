@@ -72,54 +72,63 @@ namespace WPFCalculator
         {
             calcOps.DigitEntrySet = true;
             string newValue;
-            if (calculator.ResultsString == "0")
+            if (calculator.ResultsString.Length > calculator.MaximumResultsStringLength)
             {
-                if (numberButton.Tag.ToString() == ".")
-                {
-                    if (calcOps.DecimalUsed)
-                    {
-                        SystemSounds.Exclamation.Play();
-                        newValue = calculator.ResultsString;
-                    }
-                    else
-                    {
-                        newValue = "0" + numberButton.Tag.ToString() + "0";
-                        calcOps.DecimalUsed = true;
-                    }
-                }
-                else
-                {
-                    newValue = numberButton.Tag.ToString();
-                }
+                SystemSounds.Exclamation.Play();
+                newValue = calculator.ResultsString;
             }
             else
             {
-                if (numberButton.Tag.ToString() == ".")
+                if (calculator.ResultsString == "0")
                 {
-                    if (calcOps.DecimalUsed)
+                    if (numberButton.Tag.ToString() == ".")
                     {
-                        SystemSounds.Exclamation.Play();
-                        newValue = calculator.ResultsString;
+                        if (calcOps.DecimalUsed)
+                        {
+                            SystemSounds.Exclamation.Play();
+                            newValue = calculator.ResultsString;
+                        }
+                        else
+                        {
+                            newValue = "0" + numberButton.Tag.ToString() + "0";
+                            calcOps.DecimalUsed = true;
+                        }
                     }
                     else
                     {
-                        newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString() + "0";
-                        calcOps.DecimalUsed = true;
+                        newValue = numberButton.Tag.ToString();
                     }
                 }
                 else
                 {
-                    newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
-                    newValue = newValue.Replace("0", string.Empty);
-                }
-            }
+                    if (numberButton.Tag.ToString() == ".")
+                    {
+                        if (calcOps.DecimalUsed)
+                        {
+                            SystemSounds.Exclamation.Play();
+                            newValue = calculator.ResultsString;
+                        }
+                        else
+                        {
+                            newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString() + "0";
+                            calcOps.DecimalUsed = true;
+                        }
+                    }
+                    else
+                    {
 
-            calcOps.DigitEntrySet = true;
-            decimal.TryParse(newValue, out numberButtonDigit);
-            calculator.CurrentDigit = numberButtonDigit;
-            Console.WriteLine("CD " + numberButtonDigit);
-            UpdateCurrentOperationString(newValue, calculator);
-            calcOps.ArithemticDone = false;
+                        newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
+                        newValue = newValue.Replace("0", string.Empty);
+
+                    }
+                }
+
+                calcOps.DigitEntrySet = true;
+                decimal.TryParse(newValue, out numberButtonDigit);
+                calculator.CurrentDigit = numberButtonDigit;
+                UpdateCurrentOperationString(newValue, calculator);
+                calcOps.ArithemticDone = false;
+            }
         }
 
 

@@ -12,6 +12,8 @@ namespace WPFCalculator
 
         private string operationString;
 
+        private int maximumResultsStringLength;
+
         public string OperationString
         {
             get { return operationString; }
@@ -68,6 +70,19 @@ namespace WPFCalculator
             set
             {
                 operationSet = value;
+            }
+        }
+
+        public int MaximumResultsStringLength
+        {
+            get
+            {
+                return maximumResultsStringLength;
+            }
+
+            set
+            {
+                maximumResultsStringLength = value;
             }
         }
 

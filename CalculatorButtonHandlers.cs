@@ -47,7 +47,6 @@ namespace WPFCalculator
             {
                 calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
             }
-
             calculator.OperationString += calculator.CurrentDigit + " - ";
             calcOps.DigitEntrySet = false;
 
@@ -81,7 +80,6 @@ namespace WPFCalculator
             ClearCurrentDigit(calculator);
             SetResultsString(calculator, false, calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
-
         }
 
         public void HandleSquareRoot(Calculator calculator, CalculatorOperations calcOps)
@@ -176,7 +174,7 @@ namespace WPFCalculator
             }
             else
             {
-                digitSent = Math.Round(calculator.CurrentSubTotal, 7);
+                digitSent = Math.Round(calculator.CurrentSubTotal, calculator.MaximumResultsStringLength);
                 calculator.ResultsString = digitSent.ToString();
             }
         }
