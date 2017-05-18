@@ -28,6 +28,8 @@ namespace WPFCalculator
             }
         }
 
+        private bool decimalUsed;
+
         public bool SubTotalSet
         {
             get
@@ -51,6 +53,19 @@ namespace WPFCalculator
             set
             {
                 digitEntrySet = value;
+            }
+        }
+
+        public bool DecimalUsed
+        {
+            get
+            {
+                return decimalUsed;
+            }
+
+            set
+            {
+                decimalUsed = value;
             }
         }
 

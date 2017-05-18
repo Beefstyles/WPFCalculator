@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Media;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace WPFCalculator
@@ -6,7 +8,7 @@ namespace WPFCalculator
     class CalculatorHandlers
     {
         CalculatorButtonHandlers calcButtonHandlers = new CalculatorButtonHandlers();
-        
+        private decimal numberButtonDigit;
 
         public void GeneralButtonHandler(Button button, Calculator calculator, CalculatorOperations calcOps)
         {
@@ -65,6 +67,61 @@ namespace WPFCalculator
             }
         }
 
+
+        public void NumberEntryHandler(Button numberButton, Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcOps.DigitEntrySet = true;
+            string newValue;
+            if (numberButton.Tag.ToString() == ".")
+            {
+                if (calcOps.DecimalUsed)
+                {
+                    SystemSounds.Exclamation.Play();
+                }
+            }
+            else
+            {
+                if (calculator.ResultsString == "0")
+                {
+                    if (numberButton.Tag.ToString() == ".")
+                    {
+                        newValue = "0" + numberButton.Tag.ToString() + "0";
+                        calcOps.DecimalUsed = true;
+                    }
+                    else
+                    {
+                        newValue = numberButton.Tag.ToString();
+                    }
+                }
+                else
+                {
+                    if (numberButton.Tag.ToString() == ".")
+                    {
+                        newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString() + "0";
+                    }
+                    else
+                    {
+                        newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
+                        newValue = newValue.Replace("0", string.Empty);
+                    }
+
+                }
+
+                calcOps.DigitEntrySet = true;
+                decimal.TryParse(newValue, out numberButtonDigit);
+                calculator.CurrentDigit = numberButtonDigit;
+                Console.WriteLine("CD " + numberButtonDigit);
+                UpdateCurrentOperationString(newValue, calculator);
+                calcOps.ArithemticDone = false;
+            }
+        }
+
+
+
+        public void UpdateCurrentOperationString(string currentDigitValue, Calculator calculator)
+        {
+            calculator.ResultsString = currentDigitValue.ToString();
+        }
 
         private void HandleAddition(Calculator calculator, CalculatorOperations calcOps)
         {
