@@ -9,16 +9,6 @@ namespace WPFCalculator
     {
         public CalculatorOperations.CurrentOperation currentOperation;
 
-        public void HandleAddition(Calculator calculator, CalculatorOperations calcOps)
-        {
-            calculator.CurrentSubTotal = calcOps.Addition(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
-            calculator.OperationString += calculator.CurrentDigit + " + ";
-            calcOps.DigitEntrySet = false;
-            ClearCurrentDigit(calculator);
-            SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            currentOperation = CalculatorOperations.CurrentOperation.Addition;
-        }
-
         public void PerformOperation(Calculator calculator, CalculatorOperations calcOps)
         {
             switch (currentOperation)
@@ -35,75 +25,126 @@ namespace WPFCalculator
                 case (CalculatorOperations.CurrentOperation.Division):
                     HandleDivision(calculator, calcOps);
                     break;
+                case (CalculatorOperations.CurrentOperation.Reciprocal):
+                    HandleReciprocal(calculator, calcOps);
+                    break;
+                case (CalculatorOperations.CurrentOperation.SquareRoot):
+                    HandleSquareRoot(calculator, calcOps);
+                    break;
             }
         }
-        public void HandleSubtraction(Calculator calculator, CalculatorOperations calcOps)
+
+        public void HandleAddition(Calculator calculator, CalculatorOperations calcOps)
         {
-            if (calculator.CurrentSubTotal != 0)
+            if (currentOperation == CalculatorOperations.CurrentOperation.Equals && calculator.CurrentSubTotal != 0)
             {
-                calculator.CurrentSubTotal = calcOps.Subtraction(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
+                currentOperation = CalculatorOperations.CurrentOperation.Addition;
+                calculator.OperationString += calculator.CurrentSubTotal + " + ";
             }
             else
             {
-                calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
+                calculator.CurrentSubTotal = calcOps.Addition(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
+                calculator.OperationString += calculator.CurrentDigit + " + ";
+                calcOps.DigitEntrySet = false;
+                ClearCurrentDigit(calculator);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+                currentOperation = CalculatorOperations.CurrentOperation.Addition;
             }
-            calculator.OperationString += calculator.CurrentDigit + " - ";
-            calcOps.DigitEntrySet = false;
+            
+        }
 
-            SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            ClearCurrentDigit(calculator);
-            currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
+        
+        public void HandleSubtraction(Calculator calculator, CalculatorOperations calcOps)
+        {
+            if (currentOperation == CalculatorOperations.CurrentOperation.Equals && calculator.CurrentSubTotal != 0)
+            {
+                currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
+                calculator.OperationString += calculator.CurrentSubTotal + " - ";
+            }
+            else
+            {
+                if (calculator.CurrentSubTotal != 0)
+                {
+                    calculator.CurrentSubTotal = calcOps.Subtraction(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
+                }
+                else
+                {
+                    calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
+                }
+                calculator.OperationString += calculator.CurrentDigit + " - ";
+                calcOps.DigitEntrySet = false;
+
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+                ClearCurrentDigit(calculator);
+                currentOperation = CalculatorOperations.CurrentOperation.Subtraction;
+            }
         }
 
         public void HandleEquals(Calculator calculator, CalculatorOperations calcOps)
         {
             PerformOperation(calculator, calcOps);
             calculator.OperationString = "";
-            currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
+            currentOperation = CalculatorOperations.CurrentOperation.Equals;
             calculator.OperationSet = true;
             Console.WriteLine("Current sub equals: " + calculator.CurrentSubTotal);
         }
 
         public void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
         {
-            if (calculator.CurrentSubTotal != 0)
+            if(currentOperation == CalculatorOperations.CurrentOperation.Equals && calculator.CurrentSubTotal != 0)
             {
-                calculator.CurrentSubTotal = calcOps.Multiplication(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
+                currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
+                calculator.OperationString += calculator.CurrentSubTotal + " * ";
             }
             else
             {
-                calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
+                if (calculator.CurrentSubTotal != 0)
+                {
+                    calculator.CurrentSubTotal = calcOps.Multiplication(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
+                }
+                else
+                {
+                    calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
+                }
+                calculator.OperationSet = true;
+                calculator.OperationString += calculator.CurrentDigit + " * ";
+                calcOps.DigitEntrySet = false;
+                ClearCurrentDigit(calculator);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+                currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
             }
-            calculator.OperationSet = true;
-            calculator.OperationString += calculator.CurrentDigit + " * ";
-            calcOps.DigitEntrySet = false;
-            ClearCurrentDigit(calculator);
-            SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
         }
 
         public void HandleSquareRoot(Calculator calculator, CalculatorOperations calcOps)
         {
             double numberToBeActioned;
-            if (calcOps.DigitEntrySet)
+            if (currentOperation == CalculatorOperations.CurrentOperation.Equals && calculator.CurrentSubTotal != 0)
             {
-                numberToBeActioned = (double)calculator.CurrentDigit;
-                calculator.CurrentSubTotal = Math.Sqrt((double)calculator.CurrentDigit);
-                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+                currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
+                calculator.OperationString += "√(" + calculator.CurrentSubTotal + ")";
             }
             else
             {
-                numberToBeActioned = calculator.CurrentSubTotal;
-                calculator.CurrentSubTotal = Math.Sqrt(calculator.CurrentSubTotal);
-                SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            }
+                if (calcOps.DigitEntrySet)
+                {
+                    numberToBeActioned = (double)calculator.CurrentDigit;
+                    calculator.CurrentSubTotal = Math.Sqrt((double)calculator.CurrentDigit);
+                    SetResultsString(calculator, false, calculator.CurrentSubTotal);
+                }
+                else
+                {
+                    numberToBeActioned = calculator.CurrentSubTotal;
+                    calculator.CurrentSubTotal = Math.Sqrt(calculator.CurrentSubTotal);
+                    SetResultsString(calculator, false, calculator.CurrentSubTotal);
+                }
 
-            calculator.OperationString = "√(" + numberToBeActioned + ")";
-            calcOps.DigitEntrySet = false;
-            ClearCurrentDigit(calculator);
-            SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
-            currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
+                calculator.OperationString = "√(" + numberToBeActioned + ")";
+                calcOps.DigitEntrySet = false;
+                ClearCurrentDigit(calculator);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+                checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
+                currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
+            }
         }
 
         public void HandleReciprocal(Calculator calculator, CalculatorOperations calcOps)
@@ -126,28 +167,37 @@ namespace WPFCalculator
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
             SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
+            currentOperation = CalculatorOperations.CurrentOperation.Reciprocal;
             checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
         }
 
         public void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
         {
-            if (calculator.CurrentSubTotal != 0)
+            if (currentOperation == CalculatorOperations.CurrentOperation.Equals && calculator.CurrentSubTotal != 0)
             {
-                calculator.CurrentSubTotal = calcOps.Division(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
-                Console.Write(calculator.CurrentSubTotal);
+                currentOperation = CalculatorOperations.CurrentOperation.Division;
+                calculator.OperationString += calculator.CurrentSubTotal + " / ";
             }
             else
             {
-                calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
-            }
+                if (calculator.CurrentSubTotal != 0)
+                {
+                    calculator.CurrentSubTotal = calcOps.Division(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
+                    Console.Write(calculator.CurrentSubTotal);
+                }
+                else
+                {
+                    calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
+                }
 
-            calculator.OperationString += calculator.CurrentDigit + " / ";
-            calcOps.DigitEntrySet = false;
-            ClearCurrentDigit(calculator);
-            SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            currentOperation = CalculatorOperations.CurrentOperation.Division;
-            checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
+                calculator.OperationString += calculator.CurrentDigit + " / ";
+                calcOps.DigitEntrySet = false;
+                ClearCurrentDigit(calculator);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+                currentOperation = CalculatorOperations.CurrentOperation.Division;
+                checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
+            }
+            
         }
 
         public void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
