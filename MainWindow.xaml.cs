@@ -21,19 +21,18 @@ namespace WPFCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        CalculatorButtonHandlers calcButtonHandlers = new CalculatorButtonHandlers();
+        
         Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0 };
         CalculatorOperations calcOps = new CalculatorOperations();
+        CalculatorHandlers calcHandlers = new CalculatorHandlers();
         private int numberButtonDigit;
-        private bool ArithemticDone;
 
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = calculator;
+            DataContext = calculator;
             UpdateCurrentOperationString("0");
             calculator.CurrentSubTotal = 0;
-            calcButtonHandlers.currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
         }
 
         private void UpdateCurrentOperationString(string currentDigitValue)
@@ -41,66 +40,16 @@ namespace WPFCalculator
             calculator.ResultsString = currentDigitValue.ToString();
         }
 
-
         private void ArithmeticHandler(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            
-            if (!calcOps.ArithemticDone)
-            {
-                switch (button.Name)
-                {
-                    case ("Addition"):
-                        HandleAddition();
-                        calcOps.ArithemticDone = true;
-                        break;
-                    case ("Subtraction"):
-                        HandleSubtraction();
-                        calcOps.ArithemticDone = true;
-                        break;
-                    case ("Equals"):
-                        HandleEquals();
-                        calcOps.ArithemticDone = false;
-                        break;
-                    case ("Division"):
-                        HandleDivision();
-                        calcOps.ArithemticDone = true;
-                        break;
-                    case ("Multiplication"):
-                        HandleMultiplication();
-                        break;
-                    case ("SquareRoot"):
-                        HandleSquareRoot();
-                        break;
-                    case ("Reciproval"):
-                        HandleReciprocal();
-                        break;
-                    default:
-                        MessageBox.Show("Not implemented");
-                        break;
-                }
-            }
-            
+            calcHandlers.ArithmeticHandler(button, calculator, calcOps);
         }
 
         private void GeneralButtonHandler(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            switch (button.Name)
-            {
-                case ("Negation"):
-                    HandleNegation();
-                    break;
-                case ("Clear"):
-                    HandleClear();
-                    break;
-                case ("RemoveDigit"):
-                    HandleRemoveDigit();
-                    break;
-                default:
-                    MessageBox.Show("Not implemented");
-                    break;
-            }
+            calcHandlers.GeneralButtonHandler(button, calculator, calcOps);
         }
 
         private void NumberEntryHandler(object sender, RoutedEventArgs e)
@@ -125,54 +74,6 @@ namespace WPFCalculator
             calcOps.ArithemticDone = false;
         }
 
-        private void HandleAddition()
-        {
-            calcButtonHandlers.HandleAddition(calculator, calcOps);
-        }
-
-        private void HandleSubtraction()
-        {
-            calcButtonHandlers.HandleSubtraction(calculator, calcOps);
-        }
-
-        private void HandleEquals()
-        {
-            calcButtonHandlers.HandleEquals(calculator, calcOps);
-        }
-
-        private void HandleMultiplication()
-        {
-            calcButtonHandlers.HandleMultiplication(calculator, calcOps);
-        }
-
-        private void HandleDivision()
-        {
-            calcButtonHandlers.HandleDivision(calculator, calcOps);
-        }
-
-        private void HandleNegation()
-        {
-            calcButtonHandlers.HandleNegation(calculator, calcOps);
-        }
-
-        private void HandleClear()
-        {
-            calcButtonHandlers.HandleClear(calculator);
-        }
-
-        private void HandleRemoveDigit()
-        {
-            calcButtonHandlers.HandleRemoveDigit(calculator, calcOps);
-        }
-
-        private void HandleSquareRoot()
-        {
-            calcButtonHandlers.HandleSquareRoot(calculator,calcOps);
-        }
-
-        private void HandleReciprocal()
-        {
-            calcButtonHandlers.HandleReciprocal(calculator, calcOps);
-        }
+        
     }
 }
