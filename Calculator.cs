@@ -10,10 +10,7 @@ namespace WPFCalculator
     public class Calculator : INotifyPropertyChanged
     {
 
-        private bool isNegated;
-
         private string operationString;
-
 
         public string OperationString
         {
@@ -37,7 +34,7 @@ namespace WPFCalculator
             }
         }
 
-        public double CurrentDigit
+        public decimal CurrentDigit
         {
             get {return currentDigit; }
 
@@ -78,9 +75,8 @@ namespace WPFCalculator
 
         private double currentSubTotal;
 
-        private double currentDigit;
+        private decimal currentDigit;
 
-        private int secondDigit;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -11,7 +11,7 @@ namespace WPFCalculator
 
         public void HandleAddition(Calculator calculator, CalculatorOperations calcOps)
         {
-            calculator.CurrentSubTotal = calcOps.Addition(calculator.CurrentSubTotal, calculator.CurrentDigit);
+            calculator.CurrentSubTotal = calcOps.Addition(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
             calculator.OperationString += calculator.CurrentDigit + " + ";
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
@@ -41,11 +41,11 @@ namespace WPFCalculator
         {
             if (calculator.CurrentSubTotal != 0)
             {
-                calculator.CurrentSubTotal = calcOps.Subtraction(calculator.CurrentSubTotal, calculator.CurrentDigit);
+                calculator.CurrentSubTotal = calcOps.Subtraction(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
             }
             else
             {
-                calculator.CurrentSubTotal = calculator.CurrentDigit;
+                calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
             }
 
             calculator.OperationString += calculator.CurrentDigit + " - ";
@@ -69,11 +69,11 @@ namespace WPFCalculator
         {
             if (calculator.CurrentSubTotal != 0)
             {
-                calculator.CurrentSubTotal = calcOps.Multiplication(calculator.CurrentSubTotal, calculator.CurrentDigit);
+                calculator.CurrentSubTotal = calcOps.Multiplication(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
             }
             else
             {
-                calculator.CurrentSubTotal = calculator.CurrentDigit;
+                calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
             }
             calculator.OperationSet = true;
             calculator.OperationString += calculator.CurrentDigit + " * ";
@@ -89,8 +89,8 @@ namespace WPFCalculator
             double numberToBeActioned;
             if (calcOps.DigitEntrySet)
             {
-                numberToBeActioned = calculator.CurrentDigit;
-                calculator.CurrentSubTotal = Math.Sqrt(calculator.CurrentDigit);
+                numberToBeActioned = (double)calculator.CurrentDigit;
+                calculator.CurrentSubTotal = Math.Sqrt((double)calculator.CurrentDigit);
                 SetResultsString(calculator, false, calculator.CurrentSubTotal);
             }
             else
@@ -112,8 +112,8 @@ namespace WPFCalculator
             double numberToBeActioned;
             if (calcOps.DigitEntrySet)
             {
-                numberToBeActioned = calculator.CurrentDigit;
-                calculator.CurrentSubTotal = 1 / (calculator.CurrentDigit);
+                numberToBeActioned = (double)calculator.CurrentDigit;
+                calculator.CurrentSubTotal = (double)(1 / (calculator.CurrentDigit));
                 SetResultsString(calculator, false, calculator.CurrentSubTotal);
             }
             else
@@ -134,12 +134,12 @@ namespace WPFCalculator
         {
             if (calculator.CurrentSubTotal != 0)
             {
-                calculator.CurrentSubTotal = calcOps.Division(calculator.CurrentSubTotal, calculator.CurrentDigit);
+                calculator.CurrentSubTotal = calcOps.Division(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
                 Console.Write(calculator.CurrentSubTotal);
             }
             else
             {
-                calculator.CurrentSubTotal = calculator.CurrentDigit;
+                calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
             }
 
             calculator.OperationString += calculator.CurrentDigit + " / ";
@@ -154,7 +154,7 @@ namespace WPFCalculator
             if (calcOps.DigitEntrySet)
             {
                 calculator.CurrentDigit *= -1;
-                SetResultsString(calculator, true, calculator.CurrentDigit);
+                SetResultsString(calculator, true, (double)calculator.CurrentDigit);
             }
             else
             {
@@ -196,13 +196,13 @@ namespace WPFCalculator
                 if(calculator.ResultsString.Length > 1)
                 {
                     calculator.ResultsString = calculator.ResultsString.Remove(calculator.ResultsString.Length - 1);
-                    calculator.CurrentDigit = double.Parse(calculator.ResultsString);
-                    SetResultsString(calculator, true, calculator.CurrentDigit);
+                    calculator.CurrentDigit = decimal.Parse(calculator.ResultsString);
+                    SetResultsString(calculator, true, (double)calculator.CurrentDigit);
                 }
                 else
                 {
                     calculator.CurrentDigit = 0;
-                    SetResultsString(calculator, true, calculator.CurrentDigit);
+                    SetResultsString(calculator, true, (double)calculator.CurrentDigit);
                 }                
             }
             else

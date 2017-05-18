@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,7 +26,8 @@ namespace WPFCalculator
         Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0 };
         CalculatorOperations calcOps = new CalculatorOperations();
         CalculatorHandlers calcHandlers = new CalculatorHandlers();
-        private int numberButtonDigit;
+        private decimal numberButtonDigit;
+        private bool decimalPointUsed = false;
 
         public MainWindow()
         {
@@ -59,17 +61,50 @@ namespace WPFCalculator
             string newValue;
             if (calculator.ResultsString == "0")
             {
-                newValue = numberButton.Tag.ToString();
+                if (numberButton.Tag.ToString() == ".")
+                {
+                    if (!decimalPointUsed)
+                    {
+                        newValue = "0" + numberButton.Tag.ToString() + "0";
+                        decimalPointUsed = true;
+                    }
+                    else
+                    {
+                        newValue = newValue;
+                        SystemSounds.Exclamation.Play();
+                    }
+                }
+                else
+                {
+                    newValue = numberButton.Tag.ToString();
+                }
             }
             else
             {
-                newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
-                newValue = newValue.Replace("0", string.Empty);
+                if (numberButton.Tag.ToString() == ".")
+                {
+                    if (!decimalPointUsed)
+                    {
+                        newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString() + "0";
+                    }
+                    else
+                    {
+                        SystemSounds.Exclamation.Play();
+                    }
+                }
+                else
+                {
+                    newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
+                    newValue = newValue.Replace("0", string.Empty);
+                }
+                
             }
-            ;
+
+            Console.WriteLine("new Val " + newValue);
             calcOps.DigitEntrySet = true;
-            int.TryParse(newValue, out numberButtonDigit);
+            decimal.TryParse(newValue, out numberButtonDigit);
             calculator.CurrentDigit = numberButtonDigit;
+            Console.WriteLine("CD " + numberButtonDigit);
             UpdateCurrentOperationString(newValue);
             calcOps.ArithemticDone = false;
         }
