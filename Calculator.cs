@@ -112,8 +112,8 @@ namespace WPFCalculator
 
             set
             {
-                NotifyPropertyChanged("MemorySet");
                 memorySet = value;
+                NotifyPropertyChanged("MemorySet");
             }
         }
 

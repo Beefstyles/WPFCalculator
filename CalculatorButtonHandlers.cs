@@ -220,10 +220,7 @@ namespace WPFCalculator
                     calculator.MemoryValue = calculator.CurrentSubTotal;
                 }
             }
-            if(calculator.MemoryValue != 0)
-            {
-                SetMemoryIndicator(calculator, true);
-            }
+            SetMemoryIndicator(calculator, true);
         }
 
         public void HandleMemoryRecall(Calculator calculator, CalculatorOperations calcOps)
@@ -235,9 +232,10 @@ namespace WPFCalculator
             }
             else
             {
-                calculator.CurrentSubTotal = calculator.MemoryValue;
                 SetResultsString(calculator, true, calculator.CurrentSubTotal);
             }
+            calculator.CurrentSubTotal = calculator.MemoryValue;
+            calcOps.DigitEntrySet = false;
         }
 
         public void HandleMemoryChange(Calculator calculator, CalculatorOperations calcOps, bool Addition)
