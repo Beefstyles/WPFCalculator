@@ -22,7 +22,7 @@ namespace WPFCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, MaximumResultsStringLength = 13, MemoryValue = 0 };
+        Calculator calculator = new Calculator { OperationString = "", ResultsString = "", CurrentDigit = 0, MaximumResultsStringLength = 13, MemoryValue = 0, MemorySet="M" };
         CalculatorOperations calcOps = new CalculatorOperations();
         CalculatorHandlers calcHandlers = new CalculatorHandlers();
 

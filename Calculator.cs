@@ -15,6 +15,7 @@ namespace WPFCalculator
         private int maximumResultsStringLength;
 
 
+        private string memorySet;
         public string OperationString
         {
             get { return operationString; }
@@ -99,6 +100,20 @@ namespace WPFCalculator
             set
             {
                 memoryValue = value;
+            }
+        }
+
+        public string MemorySet
+        {
+            get
+            {
+                return memorySet;
+            }
+
+            set
+            {
+                NotifyPropertyChanged("MemorySet");
+                memorySet = value;
             }
         }
 
