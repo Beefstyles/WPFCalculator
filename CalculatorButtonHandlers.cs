@@ -50,10 +50,10 @@ namespace WPFCalculator
                 SetResultsString(calculator, false, calculator.CurrentSubTotal);
                 currentOperation = CalculatorOperations.CurrentOperation.Addition;
             }
-            
+
         }
 
-        
+
         public void HandleSubtraction(Calculator calculator, CalculatorOperations calcOps)
         {
             if (currentOperation == CalculatorOperations.CurrentOperation.Equals && calculator.CurrentSubTotal != 0)
@@ -91,8 +91,9 @@ namespace WPFCalculator
 
         public void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
         {
-            if(currentOperation == CalculatorOperations.CurrentOperation.Equals || currentOperation == CalculatorOperations.CurrentOperation.SquareRoot || currentOperation == CalculatorOperations.CurrentOperation.Reciprocal && calculator.CurrentSubTotal != 0)
+            if (currentOperation == CalculatorOperations.CurrentOperation.Equals || currentOperation == CalculatorOperations.CurrentOperation.SquareRoot || currentOperation == CalculatorOperations.CurrentOperation.Reciprocal && calculator.CurrentSubTotal != 0)
             {
+                calculator.OperationString = "";
                 currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
                 calculator.OperationString += calculator.CurrentSubTotal + " * ";
             }
@@ -118,33 +119,27 @@ namespace WPFCalculator
         public void HandleSquareRoot(Calculator calculator, CalculatorOperations calcOps)
         {
             double numberToBeActioned;
-            if (currentOperation == CalculatorOperations.CurrentOperation.Equals && calculator.CurrentSubTotal != 0)
+
+            if (calcOps.DigitEntrySet)
             {
-                currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
-                //calculator.OperationString += "√(" + calculator.CurrentSubTotal + ")";
+                numberToBeActioned = (double)calculator.CurrentDigit;
+                calculator.CurrentSubTotal = Math.Sqrt((double)calculator.CurrentDigit);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
             }
             else
             {
-                if (calcOps.DigitEntrySet)
-                {
-                    numberToBeActioned = (double)calculator.CurrentDigit;
-                    calculator.CurrentSubTotal = Math.Sqrt((double)calculator.CurrentDigit);
-                    SetResultsString(calculator, false, calculator.CurrentSubTotal);
-                }
-                else
-                {
-                    numberToBeActioned = calculator.CurrentSubTotal;
-                    calculator.CurrentSubTotal = Math.Sqrt(calculator.CurrentSubTotal);
-                    SetResultsString(calculator, false, calculator.CurrentSubTotal);
-                }
-
-                calculator.OperationString = "√(" + numberToBeActioned + ")";
-                calcOps.DigitEntrySet = false;
-                ClearCurrentDigit(calculator);
+                numberToBeActioned = calculator.CurrentSubTotal;
+                calculator.CurrentSubTotal = Math.Sqrt(calculator.CurrentSubTotal);
                 SetResultsString(calculator, false, calculator.CurrentSubTotal);
-                checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
-                currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
             }
+
+            calculator.OperationString = "√(" + numberToBeActioned + ")";
+            calcOps.DigitEntrySet = false;
+            ClearCurrentDigit(calculator);
+            SetResultsString(calculator, false, calculator.CurrentSubTotal);
+            checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
+            currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
+
         }
 
         public void HandleReciprocal(Calculator calculator, CalculatorOperations calcOps)
@@ -197,7 +192,7 @@ namespace WPFCalculator
                 currentOperation = CalculatorOperations.CurrentOperation.Division;
                 checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
             }
-            
+
         }
 
         public void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
@@ -245,7 +240,7 @@ namespace WPFCalculator
         {
             if (calcops.DigitEntrySet)
             {
-                if(calculator.ResultsString.Length > 1)
+                if (calculator.ResultsString.Length > 1)
                 {
                     calculator.ResultsString = calculator.ResultsString.Remove(calculator.ResultsString.Length - 1);
                     calculator.CurrentDigit = decimal.Parse(calculator.ResultsString);
@@ -255,7 +250,7 @@ namespace WPFCalculator
                 {
                     calculator.CurrentDigit = 0;
                     SetResultsString(calculator, true, (double)calculator.CurrentDigit);
-                }                
+                }
             }
             else
             {
