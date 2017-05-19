@@ -14,6 +14,7 @@ namespace WPFCalculator
 
         private int maximumResultsStringLength;
 
+
         public string OperationString
         {
             get { return operationString; }
@@ -47,6 +48,8 @@ namespace WPFCalculator
             }
         }
 
+
+        private double memoryValue;
 
         public double CurrentSubTotal
         {
@@ -83,6 +86,19 @@ namespace WPFCalculator
             set
             {
                 maximumResultsStringLength = value;
+            }
+        }
+
+        public double MemoryValue
+        {
+            get
+            {
+                return memoryValue;
+            }
+
+            set
+            {
+                memoryValue = value;
             }
         }
 

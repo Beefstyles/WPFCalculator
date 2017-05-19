@@ -23,6 +23,21 @@ namespace WPFCalculator
                 case ("RemoveDigit"):
                     HandleRemoveDigit(calculator, calcOps);
                     break;
+                case ("MemoryClear"):
+                    HandleRemoveDigit(calculator, calcOps);
+                    break;
+                case ("MemoryRecall"):
+                    HandleRemoveDigit(calculator, calcOps);
+                    break;
+                case ("MemorySave"):
+                    HandleRemoveDigit(calculator, calcOps);
+                    break;
+                case ("MemoryAdd"):
+                    HandleRemoveDigit(calculator, calcOps);
+                    break;
+                case ("MemorySubtract"):
+                    HandleRemoveDigit(calculator, calcOps);
+                    break;
                 default:
                     MessageBox.Show("Not implemented");
                     break;
@@ -120,11 +135,11 @@ namespace WPFCalculator
                     else
                     {
                         newValue = calculator.CurrentDigit.ToString() + numberButton.Tag.ToString();
-                        if(newValue.Length <= 1)
+                        if (newValue.Length <= 1)
                         {
                             newValue = newValue.Replace("0", string.Empty);
                         }
-                        
+
                     }
                 }
 
@@ -137,59 +152,63 @@ namespace WPFCalculator
         }
 
 
-    public void UpdateCurrentOperationString(string currentDigitValue, Calculator calculator)
-    {
-        calculator.ResultsString = currentDigitValue.ToString();
-    }
+        public void UpdateCurrentOperationString(string currentDigitValue, Calculator calculator)
+        {
+            calculator.ResultsString = currentDigitValue.ToString();
+        }
 
-    private void HandleAddition(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleAddition(calculator, calcOps);
-    }
+        private void HandleAddition(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleAddition(calculator, calcOps);
+        }
 
-    private void HandleSubtraction(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleSubtraction(calculator, calcOps);
-    }
+        private void HandleSubtraction(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleSubtraction(calculator, calcOps);
+        }
 
-    private void HandleEquals(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleEquals(calculator, calcOps);
-    }
+        private void HandleEquals(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleEquals(calculator, calcOps);
+        }
 
-    private void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleMultiplication(calculator, calcOps);
-    }
+        private void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleMultiplication(calculator, calcOps);
+        }
 
-    private void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleDivision(calculator, calcOps);
-    }
+        private void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleDivision(calculator, calcOps);
+        }
 
-    private void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleNegation(calculator, calcOps);
-    }
+        private void HandleNegation(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleNegation(calculator, calcOps);
+        }
 
-    private void HandleClear(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleClear(calculator, calcOps);
-    }
+        private void HandleClear(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleClear(calculator, calcOps);
+        }
 
-    private void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleRemoveDigit(calculator, calcOps);
-    }
+        private void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleRemoveDigit(calculator, calcOps);
+        }
 
-    private void HandleSquareRoot(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleSquareRoot(calculator, calcOps);
-    }
+        private void HandleSquareRoot(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleSquareRoot(calculator, calcOps);
+        }
 
-    private void HandleReciprocal(Calculator calculator, CalculatorOperations calcOps)
-    {
-        calcButtonHandlers.HandleReciprocal(calculator, calcOps);
+        private void HandleReciprocal(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleReciprocal(calculator, calcOps);
+        }
+        private void HandleMemoryAdd(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleReciprocal(calculator, calcOps);
+        }
     }
-}
 }

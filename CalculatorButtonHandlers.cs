@@ -207,6 +207,18 @@ namespace WPFCalculator
             }
         }
 
+        public void HandleMemorySet(Calculator calculator, CalculatorOperations calcOps)
+        {
+            if (calcOps.DigitEntrySet)
+            {
+                calculator.MemoryValue = (double)calculator.CurrentDigit;
+            }
+            else
+            {
+                calculator.MemoryValue = calculator.CurrentSubTotal;
+            }
+        }
+
         private void ClearCurrentDigit(Calculator calculator)
         {
             calculator.CurrentDigit = 0;
