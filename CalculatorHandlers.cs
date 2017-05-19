@@ -24,19 +24,19 @@ namespace WPFCalculator
                     HandleRemoveDigit(calculator, calcOps);
                     break;
                 case ("MemoryClear"):
-                    HandleRemoveDigit(calculator, calcOps);
+                    HandleMemoryClear(calculator);
                     break;
                 case ("MemoryRecall"):
-                    HandleRemoveDigit(calculator, calcOps);
+                    HandleMemoryRecall(calculator, calcOps);
                     break;
                 case ("MemorySave"):
-                    HandleRemoveDigit(calculator, calcOps);
+                    HandleMemorySet(calculator, calcOps);
                     break;
                 case ("MemoryAdd"):
-                    HandleRemoveDigit(calculator, calcOps);
+                    HandleMemoryChange(calculator, calcOps, true);
                     break;
                 case ("MemorySubtract"):
-                    HandleRemoveDigit(calculator, calcOps);
+                    HandleMemoryChange(calculator, calcOps, false);
                     break;
                 default:
                     MessageBox.Show("Not implemented");
@@ -206,9 +206,22 @@ namespace WPFCalculator
         {
             calcButtonHandlers.HandleReciprocal(calculator, calcOps);
         }
-        private void HandleMemoryAdd(Calculator calculator, CalculatorOperations calcOps)
+        private void HandleMemorySet(Calculator calculator, CalculatorOperations calcOps)
         {
-            calcButtonHandlers.HandleReciprocal(calculator, calcOps);
+            calcButtonHandlers.HandleMemorySet(calculator, calcOps);
         }
+        private void HandleMemoryClear(Calculator calculator)
+        {
+            calcButtonHandlers.HandleMemoryClear(calculator);
+        }
+        private void HandleMemoryRecall(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleMemoryRecall(calculator, calcOps);
+        }
+        private void HandleMemoryChange(Calculator calculator, CalculatorOperations calcOps, bool Addition)
+        {
+            calcButtonHandlers.HandleMemoryChange(calculator, calcOps, Addition);
+        }
+
     }
 }

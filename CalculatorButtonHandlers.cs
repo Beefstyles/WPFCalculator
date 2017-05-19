@@ -136,7 +136,6 @@ namespace WPFCalculator
             calcOps.DigitEntrySet = false;
             ClearCurrentDigit(calculator);
             SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
             currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
 
         }
@@ -162,7 +161,6 @@ namespace WPFCalculator
             ClearCurrentDigit(calculator);
             SetResultsString(calculator, false, calculator.CurrentSubTotal);
             currentOperation = CalculatorOperations.CurrentOperation.Reciprocal;
-            checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
         }
 
         public void HandleDivision(Calculator calculator, CalculatorOperations calcOps)
@@ -189,7 +187,6 @@ namespace WPFCalculator
                 ClearCurrentDigit(calculator);
                 SetResultsString(calculator, false, calculator.CurrentSubTotal);
                 currentOperation = CalculatorOperations.CurrentOperation.Division;
-                checkIfDecimal(calcOps, calculator.CurrentSubTotal.ToString());
             }
         }
 
@@ -211,12 +208,64 @@ namespace WPFCalculator
         {
             if (calcOps.DigitEntrySet)
             {
-                calculator.MemoryValue = (double)calculator.CurrentDigit;
+                if(calculator.CurrentDigit != 0)
+                {
+                    calculator.MemoryValue = (double)calculator.CurrentDigit;
+                }
             }
             else
             {
-                calculator.MemoryValue = calculator.CurrentSubTotal;
+                if (calculator.CurrentSubTotal != 0)
+                {
+                    calculator.MemoryValue = calculator.CurrentSubTotal;
+                }
             }
+        }
+
+        public void HandleMemoryRecall(Calculator calculator, CalculatorOperations calcOps)
+        {
+            if (calcOps.DigitEntrySet)
+            {
+                calculator.CurrentDigit = (decimal)calculator.MemoryValue;
+                SetResultsString(calculator, true, (double)calculator.CurrentDigit);
+            }
+            else
+            {
+                calculator.CurrentSubTotal = calculator.MemoryValue;
+                SetResultsString(calculator, true, calculator.CurrentSubTotal);
+            }
+        }
+
+        public void HandleMemoryChange(Calculator calculator, CalculatorOperations calcOps, bool Addition)
+        {
+            if (calcOps.DigitEntrySet)
+            {
+                if (Addition)
+                {
+                    calculator.MemoryValue += (double)calculator.CurrentDigit;
+                }
+                else
+                {
+                    calculator.MemoryValue -= (double)calculator.CurrentDigit;
+                }
+            }
+            else
+            {
+                if (Addition)
+                {
+                    calculator.MemoryValue += calculator.CurrentSubTotal;
+                }
+                else
+                {
+                    calculator.MemoryValue -= calculator.CurrentSubTotal;
+                }
+            }
+            
+        }
+
+        public void HandleMemoryClear(Calculator calculator)
+        {
+            calculator.MemoryValue = 0;
         }
 
         private void ClearCurrentDigit(Calculator calculator)
@@ -269,18 +318,6 @@ namespace WPFCalculator
             }
         }
 
-
-        private void checkIfDecimal(CalculatorOperations calcops, string result)
-        {
-            if (result.ToLower().Contains('.'))
-            {
-                //calcops.DecimalUsed = true;
-            }
-            else
-            {
-                //calcops.DecimalUsed = false;
-            }
-        }
 
     }
 }
