@@ -71,7 +71,7 @@ namespace WPFCalculator
         {
             calcOps.DigitEntrySet = true;
             string newValue;
-            if (calculator.ResultsString.Length > calculator.MaximumResultsStringLength)
+            if (calculator.CurrentDigit.ToString().Length >= calculator.MaximumResultsStringLength - 1)
             {
                 SystemSounds.Exclamation.Play();
                 newValue = calculator.ResultsString;
