@@ -220,6 +220,10 @@ namespace WPFCalculator
                     calculator.MemoryValue = calculator.CurrentSubTotal;
                 }
             }
+            if(calculator.MemoryValue != 0)
+            {
+                SetMemoryIndicator(calculator, true);
+            }
         }
 
         public void HandleMemoryRecall(Calculator calculator, CalculatorOperations calcOps)
@@ -260,12 +264,25 @@ namespace WPFCalculator
                     calculator.MemoryValue -= calculator.CurrentSubTotal;
                 }
             }
-            
+            SetMemoryIndicator(calculator, true);
+        }
+
+        private void SetMemoryIndicator(Calculator calculator, bool enableIndicator)
+        {
+            if (enableIndicator)
+            {
+                calculator.MemorySet = "M";
+            }
+            else
+            {
+                calculator.MemorySet = "";
+            }
         }
 
         public void HandleMemoryClear(Calculator calculator)
         {
             calculator.MemoryValue = 0;
+            SetMemoryIndicator(calculator, false);
         }
 
         private void ClearCurrentDigit(Calculator calculator)

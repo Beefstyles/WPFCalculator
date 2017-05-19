@@ -45,7 +45,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Margin="2" Padding="5" HorizontalAlignment="Right" Text ="{Binding MemorySet, Mode= OneWay, UpdateSourceTrigger=PropertyChanged}" Name="MemorySet"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Margin="2" Padding="5" HorizontalAlignment="Left" Text ="{Binding MemorySet, Mode= OneWay, UpdateSourceTrigger=PropertyChanged}" Name="MemorySet"/>
             <TextBlock Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="4" Margin="2" Padding="5" HorizontalAlignment="Right" Text ="{Binding OperationString, Mode= OneWay, UpdateSourceTrigger=PropertyChanged}" Name="Operations"/>
             <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Margin="2" Padding="5" HorizontalAlignment="Right" FontSize="30"   Text ="{Binding ResultsString, Mode= OneWay, UpdateSourceTrigger=PropertyChanged}" Name="Results"/>
             <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource CalcButton}" Click="GeneralButtonHandler" Name="MemoryClear">MC</Button>
