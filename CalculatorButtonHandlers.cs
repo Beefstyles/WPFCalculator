@@ -91,7 +91,7 @@ namespace WPFCalculator
 
         public void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
         {
-            if(currentOperation == CalculatorOperations.CurrentOperation.Equals && calculator.CurrentSubTotal != 0)
+            if(currentOperation == CalculatorOperations.CurrentOperation.Equals || currentOperation == CalculatorOperations.CurrentOperation.SquareRoot || currentOperation == CalculatorOperations.CurrentOperation.Reciprocal && calculator.CurrentSubTotal != 0)
             {
                 currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
                 calculator.OperationString += calculator.CurrentSubTotal + " * ";
@@ -121,7 +121,7 @@ namespace WPFCalculator
             if (currentOperation == CalculatorOperations.CurrentOperation.Equals && calculator.CurrentSubTotal != 0)
             {
                 currentOperation = CalculatorOperations.CurrentOperation.SquareRoot;
-                calculator.OperationString += "√(" + calculator.CurrentSubTotal + ")";
+                //calculator.OperationString += "√(" + calculator.CurrentSubTotal + ")";
             }
             else
             {
@@ -268,11 +268,11 @@ namespace WPFCalculator
         {
             if (result.ToLower().Contains('.'))
             {
-                calcops.DecimalUsed = true;
+                //calcops.DecimalUsed = true;
             }
             else
             {
-                calcops.DecimalUsed = false;
+                //calcops.DecimalUsed = false;
             }
         }
 
