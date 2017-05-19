@@ -91,7 +91,7 @@ namespace WPFCalculator
 
         public void HandleMultiplication(Calculator calculator, CalculatorOperations calcOps)
         {
-            if (currentOperation == CalculatorOperations.CurrentOperation.Equals || currentOperation == CalculatorOperations.CurrentOperation.SquareRoot || currentOperation == CalculatorOperations.CurrentOperation.Reciprocal && calculator.CurrentSubTotal != 0)
+            if (currentOperation == CalculatorOperations.CurrentOperation.Equals || currentOperation == CalculatorOperations.CurrentOperation.SquareRoot || currentOperation == CalculatorOperations.CurrentOperation.Reciprocal)
             {
                 currentOperation = CalculatorOperations.CurrentOperation.Multiplication;
                 calculator.OperationString = calculator.CurrentSubTotal + " * ";
@@ -232,6 +232,7 @@ namespace WPFCalculator
             calculator.CurrentDigit = 0;
             calculator.CurrentSubTotal = 0;
             calcOps.DecimalUsed = false;
+            currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
         }
 
         public void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcops)
