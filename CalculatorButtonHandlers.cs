@@ -292,6 +292,7 @@ namespace WPFCalculator
         {
             if (digitToBeSet)
             {
+                digitSent = Math.Round(digitSent, calculator.MaximumResultsStringLength - 2);
                 calculator.ResultsString = digitSent.ToString();
             }
             else
@@ -316,22 +317,19 @@ namespace WPFCalculator
             double numberToBeActioned;
             if (calcOps.DigitEntrySet)
             {
-                numberToBeActioned = (double)calculator.CurrentDigit;
-                calculator.CurrentSubTotal = (double)(1 / (calculator.CurrentDigit));
-                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+                if(calculator.CurrentSubTotal != 0)
+                {
+                    numberToBeActioned = (double)calculator.CurrentDigit / calculator.CurrentSubTotal;
+                    calcOps.DigitEntrySet = false;
+                    ClearCurrentDigit(calculator);
+                    calculator.CurrentDigit = (decimal)numberToBeActioned;
+                    SetResultsString(calculator, true, numberToBeActioned);
+                }
+                else
+                {
+                    SystemSounds.Exclamation.Play();
+                }
             }
-            else
-            {
-                numberToBeActioned = calculator.CurrentSubTotal;
-                calculator.CurrentSubTotal = 1 / (calculator.CurrentSubTotal);
-                SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            }
-
-            calculator.OperationString = "reciproc(" + numberToBeActioned + ")";
-            calcOps.DigitEntrySet = false;
-            ClearCurrentDigit(calculator);
-            SetResultsString(calculator, false, calculator.CurrentSubTotal);
-            currentOperation = CalculatorOperations.CurrentOperation.Reciprocal;
         }
 
         public void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcops)
