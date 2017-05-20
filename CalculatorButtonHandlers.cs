@@ -312,6 +312,13 @@ namespace WPFCalculator
             currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
         }
 
+        public void HandleClearLast(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calculator.CurrentDigit = 0;
+            currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
+            SetResultsString(calculator, true, (double)calculator.CurrentDigit);
+        }
+
         public void HandlePercentage(Calculator calculator, CalculatorOperations calcOps)
         {
             double numberToBeActioned;

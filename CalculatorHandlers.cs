@@ -20,6 +20,9 @@ namespace WPFCalculator
                 case ("Clear"):
                     HandleClear(calculator, calcOps);
                     break;
+                case ("ClearLast"):
+                    HandleClearLast(calculator, calcOps);
+                    break;
                 case ("RemoveDigit"):
                     HandleRemoveDigit(calculator, calcOps);
                     break;
@@ -193,6 +196,11 @@ namespace WPFCalculator
         private void HandleClear(Calculator calculator, CalculatorOperations calcOps)
         {
             calcButtonHandlers.HandleClear(calculator, calcOps);
+        }
+
+        private void HandleClearLast(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandleClearLast(calculator, calcOps);
         }
 
         private void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcOps)
