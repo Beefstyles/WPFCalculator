@@ -311,6 +311,29 @@ namespace WPFCalculator
             currentOperation = CalculatorOperations.CurrentOperation.NoOperation;
         }
 
+        public void HandlePercentage(Calculator calculator, CalculatorOperations calcOps)
+        {
+            double numberToBeActioned;
+            if (calcOps.DigitEntrySet)
+            {
+                numberToBeActioned = (double)calculator.CurrentDigit;
+                calculator.CurrentSubTotal = (double)(1 / (calculator.CurrentDigit));
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+            }
+            else
+            {
+                numberToBeActioned = calculator.CurrentSubTotal;
+                calculator.CurrentSubTotal = 1 / (calculator.CurrentSubTotal);
+                SetResultsString(calculator, false, calculator.CurrentSubTotal);
+            }
+
+            calculator.OperationString = "reciproc(" + numberToBeActioned + ")";
+            calcOps.DigitEntrySet = false;
+            ClearCurrentDigit(calculator);
+            SetResultsString(calculator, false, calculator.CurrentSubTotal);
+            currentOperation = CalculatorOperations.CurrentOperation.Reciprocal;
+        }
+
         public void HandleRemoveDigit(Calculator calculator, CalculatorOperations calcops)
         {
             if (calcops.DigitEntrySet)

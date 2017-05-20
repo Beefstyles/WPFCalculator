@@ -75,6 +75,9 @@ namespace WPFCalculator
                     case ("Reciproval"):
                         HandleReciprocal(calculator, calcOps);
                         break;
+                    case ("Percentage"):
+                        HandlePercentage(calculator, calcOps);
+                        break;
                     default:
                         MessageBox.Show("Not implemented");
                         break;
@@ -221,6 +224,11 @@ namespace WPFCalculator
         private void HandleMemoryChange(Calculator calculator, CalculatorOperations calcOps, bool Addition)
         {
             calcButtonHandlers.HandleMemoryChange(calculator, calcOps, Addition);
+        }
+
+        private void HandlePercentage(Calculator calculator, CalculatorOperations calcOps)
+        {
+            calcButtonHandlers.HandlePercentage(calculator, calcOps);
         }
 
     }
