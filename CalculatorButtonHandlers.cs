@@ -180,7 +180,6 @@ namespace WPFCalculator
                 if (calculator.CurrentSubTotal != 0)
                 {
                     calculator.CurrentSubTotal = calcOps.Division(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
-                    Console.Write(calculator.CurrentSubTotal);
                 }
                 else
                 {
