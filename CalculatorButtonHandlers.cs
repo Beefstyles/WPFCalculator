@@ -66,12 +66,14 @@ namespace WPFCalculator
                 if (calculator.CurrentSubTotal != 0)
                 {
                     calculator.CurrentSubTotal = calcOps.Subtraction(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
+                    calculator.OperationString += calculator.CurrentDigit + " - ";
                 }
                 else
                 {
                     calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
+                    calculator.OperationString = calculator.CurrentDigit + " - ";
                 }
-                calculator.OperationString += calculator.CurrentDigit + " - ";
+                
                 calcOps.DigitEntrySet = false;
 
                 SetResultsString(calculator, false, calculator.CurrentSubTotal);
@@ -101,13 +103,16 @@ namespace WPFCalculator
                 if (calculator.CurrentSubTotal != 0)
                 {
                     calculator.CurrentSubTotal = calcOps.Multiplication(calculator.CurrentSubTotal, (double)calculator.CurrentDigit);
+                    calculator.OperationString += calculator.CurrentDigit + " * ";
                 }
                 else
                 {
+                    Console.WriteLine("0");
                     calculator.CurrentSubTotal = (double)calculator.CurrentDigit;
+                    calculator.OperationString = calculator.CurrentDigit + " * ";
                 }
                 calculator.OperationSet = true;
-                calculator.OperationString += calculator.CurrentDigit + " * ";
+                
                 calcOps.DigitEntrySet = false;
                 ClearCurrentDigit(calculator);
                 SetResultsString(calculator, false, calculator.CurrentSubTotal);
