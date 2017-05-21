@@ -12,7 +12,6 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="5"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush>
@@ -32,9 +31,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Name="Border" CornerRadius="5" BorderThickness="1"
-                    Background="#C0C0C0"
-                    BorderBrush="#404040">
-                            <ContentPresenter Margin="2" 
+                    Background="#0078D7"
+                    BorderBrush="#0078D7">
+                            <ContentPresenter Margin="6" 
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center" 
                                  RecognizesAccessKey="True"/>
@@ -60,9 +59,9 @@
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter TargetName="Border" 
-                          Property="Background" Value="#EEEEEE" />
+                          Property="Background" Value="#0078D7" />
                                 <Setter TargetName="Border" 
-                          Property="BorderBrush" Value="#AAAAAA" />
+                          Property="BorderBrush" Value="#0078D7" />
                                 <Setter Property="Foreground" Value="#888888"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -91,13 +90,7 @@
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Width="50" HorizontalAlignment="Center" Header="_View">
-                
-            </MenuItem>
-            <MenuItem Width="50" HorizontalAlignment="Center" Header="_Edit">
-
-            </MenuItem>
-            <MenuItem Width="50" HorizontalAlignment="Center" Header="_Help">
+            <MenuItem Width="50" HorizontalAlignment="Center" Header="_About">
                 
             </MenuItem>
         </Menu>
